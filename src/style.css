@@ -1128,6 +1128,18 @@ header {
   transform: rotateY(180deg);
 }
 
+.vocab-card.flipped .vocab-card-front {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.vocab-card:not(.flipped) .vocab-card-back {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .vocab-card-front, .vocab-card-back {
   position: absolute;
   width: 100%;

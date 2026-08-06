@@ -44,7 +44,7 @@ export const curriculumData = [
           name: "👤 인물 명사 (People)",
           words: [
             { word: "학생", definition: "Student", example: "학생이 학교에서 공부를 합니다.", image: "/topik_student_scene.jpg" },
-            { word: "선생님", definition: "Teacher", example: "선생님이 교실에서 한국어를 가르칩니다.", image: "/topik_student_scene.jpg" },
+            { word: "선생님", definition: "Teacher", example: "선생님이 교실에서 한국어를 가르칩니다.", image: "/topik_teacher_scene.jpg" },
             { word: "의사", definition: "Doctor", example: "의사가 병원에서 아픈 사람을 치료합니다.", image: "/topik_doctor_scene.jpg" },
             { word: "요리사", definition: "Chef / Cook", example: "요리사가 식당에서 맛있는 음식을 만듭니다.", image: "/topik_chef_scene.jpg" }
           ]
@@ -52,19 +52,19 @@ export const curriculumData = [
         {
           name: "📍 장소 명사 (Places)",
           words: [
-            { word: "학교", definition: "School", example: "우리는 학교에서 친구를 만납니다.", image: "/topik_student_scene.jpg" },
-            { word: "병원", definition: "Hospital", example: "머리가 아파서 병원에 갔습니다.", image: "/topik_doctor_scene.jpg" },
-            { word: "식당", definition: "Restaurant", example: "식당에서 김치찌개를 먹었습니다.", image: "/topik_chef_scene.jpg" },
-            { word: "은행", definition: "Bank", example: "돈을 찾으러 은행에 갑니다.", image: "/topik_cafe_scene.jpg" }
+            { word: "학교", definition: "School", example: "우리는 학교에서 친구를 만납니다.", image: "/topik_school_scene.jpg" },
+            { word: "병원", definition: "Hospital", example: "머리가 아파서 병원에 갔습니다.", image: "/topik_hospital_scene.jpg" },
+            { word: "식당", definition: "Restaurant", example: "식당에서 김치찌개를 먹었습니다.", image: "/topik_restaurant_scene.jpg" },
+            { word: "은행", definition: "Bank", example: "돈을 찾으러 은행에 갑니다.", image: "/topik_bank_scene.jpg" }
           ]
         },
         {
           name: "🏃 동작 동사 (Basic Verbs)",
           words: [
-            { word: "가다", definition: "To go", example: "저는 오늘 시장에 갑니다.", image: "/topik_student_scene.jpg" },
-            { word: "오다", definition: "To come", example: "비가 오면 우산을 씁니다.", image: "/topik_rainy_scene.jpg" },
-            { word: "하다", definition: "To do", example: "동생은 매일 운동을 합니다.", image: "/topik_bookstore_scene.jpg" },
-            { word: "먹다", definition: "To eat", example: "아침에 사과를 먹었습니다.", image: "/topik_chef_scene.jpg" }
+            { word: "가다", definition: "To go", example: "저는 오늘 시장에 갑니다.", image: "/topik_go_scene.jpg" },
+            { word: "오다", definition: "To come", example: "비가 오면 우산을 씁니다.", image: "/topik_come_scene.jpg" },
+            { word: "하다", definition: "To do", example: "동생은 매일 운동을 합니다.", image: "/topik_student_scene.jpg" },
+            { word: "먹다", definition: "To eat", example: "아침에 사과를 먹었습니다.", image: "/topik_restaurant_scene.jpg" }
           ]
         }
       ]
@@ -220,26 +220,26 @@ export const curriculumData = [
           words: [
             { word: "옷", definition: "Clothes", example: "백화점에서 예쁜 옷을 샀습니다.", image: "/topik_bookstore_scene.jpg" },
             { word: "신발", definition: "Shoes", example: "이 구두는 신발 가게에서 팝니다.", image: "/topik_student_scene.jpg" },
-            { word: "과일", definition: "Fruit", example: "시장에서 신선한 과일을 샀어요.", image: "/topik_chef_scene.jpg" },
+            { word: "과일", definition: "Fruit", example: "시장에서 신선한 과일을 샀어요.", image: "/topik_restaurant_scene.jpg" },
             { word: "우산", definition: "Umbrella", example: "비가 와서 우산을 준비했습니다.", image: "/topik_rainy_scene.jpg" }
           ]
         },
         {
           name: "🪙 가격 및 단위 명사 (Units & Prices)",
           words: [
-            { word: "돈", definition: "Money", example: "지갑에 돈이 별로 없습니다.", image: "/topik_cafe_scene.jpg" },
-            { word: "원", definition: "Won (Korean Currency)", example: "커피 한 잔에 오천 원입니다.", image: "/topik_cafe_scene.jpg" },
+            { word: "돈", definition: "Money", example: "지갑에 돈이 별로 없습니다.", image: "/topik_bank_scene.jpg" },
+            { word: "원", definition: "Won (Korean Currency)", example: "커피 한 잔에 오천 원입니다.", image: "/topik_bank_scene.jpg" },
             { word: "잔", definition: "Glass / Cup", example: "물 한 잔만 가져다 주세요.", image: "/topik_cafe_scene.jpg" },
-            { word: "개", definition: "Item counter (general)", example: "사과 세 개를 바구니에 담았습니다.", image: "/topik_chef_scene.jpg" }
+            { word: "개", definition: "Item counter (general)", example: "사과 세 개를 바구니에 담았습니다.", image: "/topik_restaurant_scene.jpg" }
           ]
         },
         {
           name: "🛒 쇼핑 관련 동사 (Shopping Verbs)",
           words: [
             { word: "사다", definition: "To buy", example: "가게에서 빵을 샀습니다.", image: "/topik_bookstore_scene.jpg" },
-            { word: "팔다", definition: "To sell", example: "이 마트에서는 과일을 싸게 팝니다.", image: "/topik_chef_scene.jpg" },
+            { word: "팔다", definition: "To sell", example: "이 마트에서는 과일을 싸게 팝니다.", image: "/topik_restaurant_scene.jpg" },
             { word: "빌리다", definition: "To borrow", example: "도서관에서 책 세 권을 빌렸습니다.", image: "/topik_bookstore_scene.jpg" },
-            { word: "주다", definition: "To give", example: "동생에게 생일 선물을 주었습니다.", image: "/topik_student_scene.jpg" }
+            { word: "주다", definition: "To give", example: "동생에게 생일 선물을 주었습니다.", image: "/topik_teacher_scene.jpg" }
           ]
         }
       ]
@@ -385,7 +385,7 @@ export const curriculumData = [
     // 상세 시간표 (Timeline)
     timeline: [
       { time: "10분", activity: "도입 & 2회차 복습", detail: "지난 시간의 물건, 단위, 쇼핑 관련 어휘 20개 구두 테스트 및 오늘 다룰 일정/시간/상태 표현 안내" },
-      { time: "30분", activity: "1단계: 단위 공부", detail: "오늘의 주제 어휘 (시간/날씨 명사 📅, 상태 형용사 🌡️, 계획 동사 🗺️)의 뉘앙스 파악 및 구문 활용" },
+      { time: "30분", activity: "1단계: 단위 공부", detail: "오늘의 주제 어휘 (시간/날씨 명사 📅, 상태 형용사 🌡️, 계획 동사 🗺️)의 뉘앙스 파악 및구문 활용" },
       { time: "35분", activity: "2단계: 읽기 실전 훈련", detail: "실제 TOPIK 기출 기반 읽기 문제 풀이 (요일 약속 메모 해석, 감기 지문 내용 일치) 및 주제 도출법 해설" },
       { time: "10분", activity: "쉬는 시간", detail: "중간 휴식 시간" },
       { time: "25분", activity: "3단계: 듣기 실전 훈련", detail: "실제 TOPIK 기출 기반 듣기 문제 청취 (주말 계획 대답, 비오는 날 빨래 걷기) 및 상황 추론 훈련" },
