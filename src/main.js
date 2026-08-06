@@ -92,24 +92,25 @@ function loadLocalCurriculum() {
           });
         }
 
-        // Force sync correct answer index to prevent graded question desync issues
+        // Force sync correct answer index and dynamically insert new practice questions
         if (session.practiceQuestions && curriculumData[idx] && curriculumData[idx].practiceQuestions) {
-          session.practiceQuestions.forEach((q) => {
-            const freshQ = curriculumData[idx].practiceQuestions.find(item => item.id === q.id);
-            if (freshQ) {
-              q.correct = freshQ.correct;
-            }
-          });
-        }
-        
-        if (session.id === 3 && session.practiceQuestions) {
-          const qIdx = session.practiceQuestions.findIndex(q => q.id === 'q3_l2');
-          if (qIdx !== -1) {
-            const currentQ = session.practiceQuestions[qIdx];
-            if (currentQ.question.includes('남자가 할 행동') || currentQ.question.includes('빨래')) {
-              const freshQ = curriculumData[2].practiceQuestions.find(q => q.id === 'q3_l2');
-              session.practiceQuestions[qIdx] = JSON.parse(JSON.stringify(freshQ));
-            }
+          if (session.practiceQuestions.length !== curriculumData[idx].practiceQuestions.length) {
+            const freshQuestions = JSON.parse(JSON.stringify(curriculumData[idx].practiceQuestions));
+            freshQuestions.forEach((fq, fIdx) => {
+              const existingQ = session.practiceQuestions.find(eq => eq.id === fq.id);
+              if (existingQ) {
+                // Keep the existing user properties
+                freshQuestions[fIdx] = existingQ;
+              }
+            });
+            session.practiceQuestions = freshQuestions;
+          } else {
+            session.practiceQuestions.forEach((q) => {
+              const freshQ = curriculumData[idx].practiceQuestions.find(item => item.id === q.id);
+              if (freshQ) {
+                q.correct = freshQ.correct;
+              }
+            });
           }
         }
       });
