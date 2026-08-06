@@ -43,28 +43,28 @@ export const curriculumData = [
         {
           name: "👤 인물 명사 (People)",
           words: [
-            { word: "학생", definition: "Student", example: "학생이 학교에서 공부를 합니다.", image: "/topik_student_scene.jpg" },
-            { word: "선생님", definition: "Teacher", example: "선생님이 교실에서 한국어를 가르칩니다.", image: "/topik_teacher_scene.jpg" },
-            { word: "의사", definition: "Doctor", example: "의사가 병원에서 아픈 사람을 치료합니다.", image: "/topik_doctor_scene.jpg" },
-            { word: "요리사", definition: "Chef / Cook", example: "요리사가 식당에서 맛있는 음식을 만듭니다.", image: "/topik_chef_scene.jpg" }
+            { word: "학생", definition: "Student", example: "학생이 학교에서 공부를 합니다.", image: "topik_student_scene.jpg" },
+            { word: "선생님", definition: "Teacher", example: "선생님이 교실에서 한국어를 가르칩니다.", image: "topik_teacher_scene.jpg" },
+            { word: "의사", definition: "Doctor", example: "의사가 병원에서 아픈 사람을 치료합니다.", image: "topik_doctor_scene.jpg" },
+            { word: "요리사", definition: "Chef / Cook", example: "요리사가 식당에서 맛있는 음식을 만듭니다.", image: "topik_chef_scene.jpg" }
           ]
         },
         {
           name: "📍 장소 명사 (Places)",
           words: [
-            { word: "학교", definition: "School", example: "우리는 학교에서 친구를 만납니다.", image: "/topik_school_scene.jpg" },
-            { word: "병원", definition: "Hospital", example: "머리가 아파서 병원에 갔습니다.", image: "/topik_hospital_scene.jpg" },
-            { word: "식당", definition: "Restaurant", example: "식당에서 김치찌개를 먹었습니다.", image: "/topik_restaurant_scene.jpg" },
-            { word: "은행", definition: "Bank", example: "돈을 찾으러 은행에 갑니다.", image: "/topik_bank_scene.jpg" }
+            { word: "학교", definition: "School", example: "우리는 학교에서 친구를 만납니다.", image: "topik_school_scene.jpg" },
+            { word: "병원", definition: "Hospital", example: "머리가 아파서 병원에 갔습니다.", image: "topik_hospital_scene.jpg" },
+            { word: "식당", definition: "Restaurant", example: "식당에서 김치찌개를 먹었습니다.", image: "topik_restaurant_scene.jpg" },
+            { word: "은행", definition: "Bank", example: "돈을 찾으러 은행에 갑니다.", image: "topik_bank_scene.jpg" }
           ]
         },
         {
           name: "🏃 동작 동사 (Basic Verbs)",
           words: [
-            { word: "가다", definition: "To go", example: "저는 오늘 시장에 갑니다.", image: "/topik_go_scene.jpg" },
-            { word: "오다", definition: "To come", example: "비가 오면 우산을 씁니다.", image: "/topik_come_scene.jpg" },
-            { word: "하다", definition: "To do", example: "동생은 매일 운동을 합니다.", image: "/topik_student_scene.jpg" },
-            { word: "먹다", definition: "To eat", example: "아침에 사과를 먹었습니다.", image: "/topik_restaurant_scene.jpg" }
+            { word: "가다", definition: "To go", example: "저는 오늘 시장에 갑니다.", image: "topik_go_scene.jpg" },
+            { word: "오다", definition: "To come", example: "비가 오면 우산을 씁니다.", image: "topik_come_scene.jpg" },
+            { word: "하다", definition: "To do", example: "동생은 매일 운동을 합니다.", image: "topik_student_scene.jpg" },
+            { word: "먹다", definition: "To eat", example: "아침에 사과를 먹었습니다.", image: "topik_restaurant_scene.jpg" }
           ]
         }
       ]
@@ -72,12 +72,12 @@ export const curriculumData = [
 
     // 🕹️ 1회차 어휘-그림 매칭 게임 (영어가 완전 배제된 6쌍)
     vocabGamePairs: [
-      { type: "text-image", text: "서점", matchVal: "/topik_bookstore_scene.jpg", key: "bookstore" },
-      { type: "text-image", text: "카페", matchVal: "/topik_cafe_scene.jpg", key: "cafe" },
-      { type: "text-image", text: "비 (날씨)", matchVal: "/topik_rainy_scene.jpg", key: "rainy" },
-      { type: "text-image", text: "의사", matchVal: "/topik_doctor_scene.jpg", key: "doctor" },
-      { type: "text-image", text: "요리사", matchVal: "/topik_chef_scene.jpg", key: "chef" },
-      { type: "text-image", text: "학생", matchVal: "/topik_student_scene.jpg", key: "student" }
+      { type: "text-image", text: "서점", matchVal: "topik_bookstore_scene.jpg", key: "bookstore" },
+      { type: "text-image", text: "카페", matchVal: "topik_cafe_scene.jpg", key: "cafe" },
+      { type: "text-image", text: "비 (날씨)", matchVal: "topik_rainy_scene.jpg", key: "rainy" },
+      { type: "text-image", text: "의사", matchVal: "topik_doctor_scene.jpg", key: "doctor" },
+      { type: "text-image", text: "요리사", matchVal: "topik_chef_scene.jpg", key: "chef" },
+      { type: "text-image", text: "학생", matchVal: "topik_student_scene.jpg", key: "student" }
     ],
 
     // 2단계: 실전 훈련 (Actual Practice)
@@ -87,7 +87,7 @@ export const curriculumData = [
         type: "reading",
         category: "읽기 (Reading) 기출",
         question: "다음 그림을 보고 무엇을 하는 상황인지 가장 알맞은 것을 고르십시오. (TOPIK I 기출)",
-        image: "/topik_bookstore_scene.jpg",
+        image: "topik_bookstore_scene.jpg",
         options: ["밥을 먹습니다.", "노래를 부릅니다.", "책을 고릅니다.", "옷을 삽니다."],
         correct: 2, // 책을 고릅니다
         explanation: "그림을 보면 많은 책이 꽂혀 있는 책장 앞에서 책을 한 권 손에 들고 보고 있습니다. 책을 고르고 파는 장소인 서점의 맥락과 일치하는 동작입니다.",
@@ -120,7 +120,7 @@ export const curriculumData = [
         type: "listening",
         category: "듣기 (Listening) 기출",
         question: "다음을 듣고 그림과 어울리는 올바른 대화 상황을 고르십시오. (TOPIK I 기출)",
-        image: "/topik_cafe_scene.jpg",
+        image: "topik_cafe_scene.jpg",
         audioScript: [
           { speaker: "여", text: "여기 커피 두 잔하고 케이크 하나 주세요." },
           { speaker: "남", text: "네, 알겠습니다. 저기 테이블에서 잠시만 기다려 주세요." }
@@ -218,28 +218,28 @@ export const curriculumData = [
         {
           name: "🛍️ 물건 및 상점 명사 (Items & Shops)",
           words: [
-            { word: "옷", definition: "Clothes", example: "백화점에서 예쁜 옷을 샀습니다.", image: "/topik_bookstore_scene.jpg" },
-            { word: "신발", definition: "Shoes", example: "이 구두는 신발 가게에서 팝니다.", image: "/topik_student_scene.jpg" },
-            { word: "과일", definition: "Fruit", example: "시장에서 신선한 과일을 샀어요.", image: "/topik_restaurant_scene.jpg" },
-            { word: "우산", definition: "Umbrella", example: "비가 와서 우산을 준비했습니다.", image: "/topik_rainy_scene.jpg" }
+            { word: "옷", definition: "Clothes", example: "백화점에서 예쁜 옷을 샀습니다.", image: "topik_bookstore_scene.jpg" },
+            { word: "신발", definition: "Shoes", example: "이 구두는 신발 가게에서 팝니다.", image: "topik_student_scene.jpg" },
+            { word: "과일", definition: "Fruit", example: "시장에서 신선한 과일을 샀어요.", image: "topik_restaurant_scene.jpg" },
+            { word: "우산", definition: "Umbrella", example: "비가 와서 우산을 준비했습니다.", image: "topik_rainy_scene.jpg" }
           ]
         },
         {
           name: "🪙 가격 및 단위 명사 (Units & Prices)",
           words: [
-            { word: "돈", definition: "Money", example: "지갑에 돈이 별로 없습니다.", image: "/topik_bank_scene.jpg" },
-            { word: "원", definition: "Won (Korean Currency)", example: "커피 한 잔에 오천 원입니다.", image: "/topik_bank_scene.jpg" },
-            { word: "잔", definition: "Glass / Cup", example: "물 한 잔만 가져다 주세요.", image: "/topik_cafe_scene.jpg" },
-            { word: "개", definition: "Item counter (general)", example: "사과 세 개를 바구니에 담았습니다.", image: "/topik_restaurant_scene.jpg" }
+            { word: "돈", definition: "Money", example: "지갑에 돈이 별로 없습니다.", image: "topik_bank_scene.jpg" },
+            { word: "원", definition: "Won (Korean Currency)", example: "커피 한 잔에 오천 원입니다.", image: "topik_bank_scene.jpg" },
+            { word: "잔", definition: "Glass / Cup", example: "물 한 잔만 가져다 주세요.", image: "topik_cafe_scene.jpg" },
+            { word: "개", definition: "Item counter (general)", example: "사과 세 개를 바구니에 담았습니다.", image: "topik_restaurant_scene.jpg" }
           ]
         },
         {
           name: "🛒 쇼핑 관련 동사 (Shopping Verbs)",
           words: [
-            { word: "사다", definition: "To buy", example: "가게에서 빵을 샀습니다.", image: "/topik_bookstore_scene.jpg" },
-            { word: "팔다", definition: "To sell", example: "이 마트에서는 과일을 싸게 팝니다.", image: "/topik_restaurant_scene.jpg" },
-            { word: "빌리다", definition: "To borrow", example: "도서관에서 책 세 권을 빌렸습니다.", image: "/topik_bookstore_scene.jpg" },
-            { word: "주다", definition: "To give", example: "동생에게 생일 선물을 주었습니다.", image: "/topik_teacher_scene.jpg" }
+            { word: "사다", definition: "To buy", example: "가게에서 빵을 샀습니다.", image: "topik_bookstore_scene.jpg" },
+            { word: "팔다", definition: "To sell", example: "이 마트에서는 과일을 싸게 팝니다.", image: "topik_restaurant_scene.jpg" },
+            { word: "빌리다", definition: "To borrow", example: "도서관에서 책 세 권을 빌렸습니다.", image: "topik_bookstore_scene.jpg" },
+            { word: "주다", definition: "To give", example: "동생에게 생일 선물을 주었습니다.", image: "topik_teacher_scene.jpg" }
           ]
         }
       ]
@@ -247,12 +247,12 @@ export const curriculumData = [
 
     // 🕹️ 2회차 어휘-그림 매칭 게임 (영어가 완전 배제된 6쌍)
     vocabGamePairs: [
-      { type: "text-image", text: "서점", matchVal: "/topik_bookstore_scene.jpg", key: "bookstore" },
-      { type: "text-image", text: "카페", matchVal: "/topik_cafe_scene.jpg", key: "cafe" },
-      { type: "text-image", text: "비 (날씨)", matchVal: "/topik_rainy_scene.jpg", key: "rainy" },
-      { type: "text-image", text: "의사", matchVal: "/topik_doctor_scene.jpg", key: "doctor" },
-      { type: "text-image", text: "요리사", matchVal: "/topik_chef_scene.jpg", key: "chef" },
-      { type: "text-image", text: "학생", matchVal: "/topik_student_scene.jpg", key: "student" }
+      { type: "text-image", text: "서점", matchVal: "topik_bookstore_scene.jpg", key: "bookstore" },
+      { type: "text-image", text: "카페", matchVal: "topik_cafe_scene.jpg", key: "cafe" },
+      { type: "text-image", text: "비 (날씨)", matchVal: "topik_rainy_scene.jpg", key: "rainy" },
+      { type: "text-image", text: "의사", matchVal: "topik_doctor_scene.jpg", key: "doctor" },
+      { type: "text-image", text: "요리사", matchVal: "topik_chef_scene.jpg", key: "chef" },
+      { type: "text-image", text: "학생", matchVal: "topik_student_scene.jpg", key: "student" }
     ],
 
     // 2단계: 실전 훈련 (Actual Practice)
@@ -401,28 +401,28 @@ export const curriculumData = [
         {
           name: "📅 시간 및 날씨 명사 (Time & Weather)",
           words: [
-            { word: "오늘", definition: "Today", example: "오늘 오후에 친구를 만나기로 했습니다.", image: "/topik_cafe_scene.jpg" },
-            { word: "내일", definition: "Tomorrow", example: "내일은 주말이라 회사에 안 갑니다.", image: "/topik_student_scene.jpg" },
-            { word: "주말", definition: "Weekend", example: "주말에 산에 등산을 하러 갑니다.", image: "/topik_bookstore_scene.jpg" },
-            { word: "비", definition: "Rain", example: "비가 오니까 외출하지 마세요.", image: "/topik_rainy_scene.jpg" }
+            { word: "오늘", definition: "Today", example: "오늘 오후에 친구를 만나기로 했습니다.", image: "topik_cafe_scene.jpg" },
+            { word: "내일", definition: "Tomorrow", example: "내일은 주말이라 회사에 안 갑니다.", image: "topik_student_scene.jpg" },
+            { word: "주말", definition: "Weekend", example: "주말에 산에 등산을 하러 갑니다.", image: "topik_bookstore_scene.jpg" },
+            { word: "비", definition: "Rain", example: "비가 오니까 외출하지 마세요.", image: "topik_rainy_scene.jpg" }
           ]
         },
         {
           name: "🌡️ 상태 형용사 (Adjectives)",
           words: [
-            { word: "아프다", definition: "Sick / Painful", example: "어제부터 머리가 아픕니다.", image: "/topik_doctor_scene.jpg" },
-            { word: "피곤하다", definition: "Tired", example: "밤에 늦게 자서 오늘 아주 피곤해요.", image: "/topik_student_scene.jpg" },
-            { word: "바쁘다", definition: "Busy", example: "시험 공부 때문에 요즘 무척 바쁩니다.", image: "/topik_bookstore_scene.jpg" },
-            { word: "맑다", definition: "Clear / Sunny", example: "하늘이 아주 맑고 시원합니다.", image: "/topik_rainy_scene.jpg" }
+            { word: "아프다", definition: "Sick / Painful", example: "어제부터 머리가 아픕니다.", image: "topik_doctor_scene.jpg" },
+            { word: "피곤하다", definition: "Tired", example: "밤에 늦게 자서 오늘 아주 피곤해요.", image: "topik_student_scene.jpg" },
+            { word: "바쁘다", definition: "Busy", example: "시험 공부 때문에 요즘 무척 바쁩니다.", image: "topik_bookstore_scene.jpg" },
+            { word: "맑다", definition: "Clear / Sunny", example: "하늘이 아주 맑고 시원합니다.", image: "topik_rainy_scene.jpg" }
           ]
         },
         {
           name: "🗺️ 상태 및 계획 동사 (State & Plan)",
           words: [
-            { word: "쉬다", definition: "To rest", example: "피곤할 때는 집에서 푹 쉽니다.", image: "/topik_student_scene.jpg" },
-            { word: "약속하다", definition: "To promise / make appointment", example: "친구와 6시에 만나기로 약속했습니다.", image: "/topik_cafe_scene.jpg" },
-            { word: "생각하다", definition: "To think", example: "내년에는 한국에 갈까 생각합니다.", image: "/topik_bookstore_scene.jpg" },
-            { word: "사오다", definition: "To buy and bring", example: "돌아오는 길에 약을 사왔습니다.", image: "/topik_doctor_scene.jpg" }
+            { word: "쉬다", definition: "To rest", example: "피곤할 때는 집에서 푹 쉽니다.", image: "topik_student_scene.jpg" },
+            { word: "약속하다", definition: "To promise / make appointment", example: "친구와 6시에 만나기로 약속했습니다.", image: "topik_cafe_scene.jpg" },
+            { word: "생각하다", definition: "To think", example: "내년에는 한국에 갈까 생각합니다.", image: "topik_bookstore_scene.jpg" },
+            { word: "사오다", definition: "To buy and bring", example: "돌아오는 길에 약을 사왔습니다.", image: "topik_doctor_scene.jpg" }
           ]
         }
       ]
@@ -430,12 +430,12 @@ export const curriculumData = [
 
     // 🕹️ 3회차 어휘-그림 매칭 게임 (영어가 완전 배제된 6쌍)
     vocabGamePairs: [
-      { type: "text-image", text: "서점", matchVal: "/topik_bookstore_scene.jpg", key: "bookstore" },
-      { type: "text-image", text: "카페", matchVal: "/topik_cafe_scene.jpg", key: "cafe" },
-      { type: "text-image", text: "비 (날씨)", matchVal: "/topik_rainy_scene.jpg", key: "rainy" },
-      { type: "text-image", text: "의사", matchVal: "/topik_doctor_scene.jpg", key: "doctor" },
-      { type: "text-image", text: "요리사", matchVal: "/topik_chef_scene.jpg", key: "chef" },
-      { type: "text-image", text: "학생", matchVal: "/topik_student_scene.jpg", key: "student" }
+      { type: "text-image", text: "서점", matchVal: "topik_bookstore_scene.jpg", key: "bookstore" },
+      { type: "text-image", text: "카페", matchVal: "topik_cafe_scene.jpg", key: "cafe" },
+      { type: "text-image", text: "비 (날씨)", matchVal: "topik_rainy_scene.jpg", key: "rainy" },
+      { type: "text-image", text: "의사", matchVal: "topik_doctor_scene.jpg", key: "doctor" },
+      { type: "text-image", text: "요리사", matchVal: "topik_chef_scene.jpg", key: "chef" },
+      { type: "text-image", text: "학생", matchVal: "topik_student_scene.jpg", key: "student" }
     ],
 
     // 2단계: 실전 훈련 (Actual Practice)
@@ -511,7 +511,7 @@ export const curriculumData = [
         type: "listening",
         category: "듣기 (Listening) 기출",
         question: "다음을 듣고 대화가 끝난 후 두 사람이 할 행동으로 가장 알맞은 것을 고르십시오. (TOPIK I 기출)",
-        image: "/topik_rainy_scene.jpg",
+        image: "topik_rainy_scene.jpg",
         audioScript: [
           { speaker: "여", text: "민수 씨, 지금 밖에 비가 많이 와요. 혹시 우산이 있어요?" },
           { speaker: "남", text: "아니요, 안 가져왔어요. 수진 씨는 우산이 있어요?" },

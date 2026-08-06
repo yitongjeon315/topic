@@ -67,6 +67,31 @@ function loadLocalCurriculum() {
           });
         }
 
+        // Clean all image paths to remove leading slashes (crucial for Vite base /topic/ subdirectory support)
+        if (session.vocabGamePairs) {
+          session.vocabGamePairs.forEach(p => {
+            if (p.type === 'text-image' && p.matchVal.startsWith('/')) {
+              p.matchVal = p.matchVal.substring(1);
+            }
+          });
+        }
+        if (session.vocabWarmUp) {
+          session.vocabWarmUp.categories.forEach(cat => {
+            cat.words.forEach(w => {
+              if (w.image && w.image.startsWith('/')) {
+                w.image = w.image.substring(1);
+              }
+            });
+          });
+        }
+        if (session.practiceQuestions) {
+          session.practiceQuestions.forEach(q => {
+            if (q.image && q.image.startsWith('/')) {
+              q.image = q.image.substring(1);
+            }
+          });
+        }
+
         // Force sync correct answer index to prevent graded question desync issues
         if (session.practiceQuestions && curriculumData[idx] && curriculumData[idx].practiceQuestions) {
           session.practiceQuestions.forEach((q) => {
