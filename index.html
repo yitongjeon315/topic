@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TOPIK I (1급) 3회 완성 특강</title>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Header -->
+      <header>
+        <div class="header-container">
+          <div class="logo">
+            <span>TOPIK-Edu</span> Smart Academy
+          </div>
+          
+          <div class="header-controls">
+            <!-- Instructor mode toggle -->
+            <button class="zoom-toggle-btn" id="instructor-toggle" style="background: linear-gradient(135deg, #10b981, #059669);">
+              🔑 강사 모드 OFF
+            </button>
+
+            <!-- PDF Download -->
+            <button class="zoom-toggle-btn" id="pdf-print-btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
+              📄 PDF 다운로드
+            </button>
+
+            <!-- Reset edits -->
+            <button class="zoom-toggle-btn" id="reset-btn" style="background: linear-gradient(135deg, #6b7280, #4b5563);">
+              🔄 교안 초기화
+            </button>
+
+            <!-- Zoom Presentation Mode Toggle -->
+            <button class="zoom-toggle-btn" id="zoom-toggle">
+              🖥️ 줌 화면 공유 모드 ON
+            </button>
+            
+            <div class="progress-wrapper">
+              <div class="progress-text" id="progress-percent">학습 진도: 33%</div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-bar" style="width: 33.33%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Hero Banner -->
+      <section class="hero">
+        <div class="hero-content">
+          <h1>TOPIK I (1급) 3회 완성 초고속 특강</h1>
+          <p>하루 2시간씩 총 3회! 단위 공부와 읽기/듣기 실전 훈련, 핵심 어휘 장악까지 완벽 구성.</p>
+        </div>
+      </section>
+
+      <!-- Main Contents -->
+      <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+          <h3 class="nav-title">강의 커리큘럼</h3>
+          <ul class="nav-list" id="curriculum-nav">
+            <!-- Nav buttons will be injected by JS -->
+          </ul>
+        </aside>
+
+        <!-- Dynamic Content Area -->
+        <main class="content-area" id="session-content">
+          <!-- Session components will be injected by JS -->
+        </main>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <p>&copy; 2026 TOPIK-Edu Smart Academy. All rights reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem;">본 플랫폼은 TOPIK I 시험 규격 및 기출 삽화를 재현한 모의 학습 플랫폼입니다.</p>
+      </footer>
+    </div>
+
+    <!-- Main JavaScript Entry -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
