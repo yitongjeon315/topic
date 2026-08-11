@@ -36,6 +36,19 @@ const requiredQuestionCorrections = {
   q3_l4: ['audioScript', 'optionExplanations']
 };
 
+const isUnbundledSource = Array.from(document.scripts).some((script) => {
+  try {
+    return new URL(script.src).pathname.endsWith('/src/main.js');
+  } catch {
+    return false;
+  }
+});
+
+function resolveAssetPath(path) {
+  if (!path || /^(?:https?:|data:|\/)/.test(path)) return path;
+  return isUnbundledSource ? `public/${path}` : path;
+}
+
 // DOM Elements
 const navContainer = document.getElementById('curriculum-nav');
 const contentContainer = document.getElementById('session-content');
@@ -418,7 +431,7 @@ function loadSession(index) {
                     <span class="word-badge" style="position: absolute; top: 8px; left: 8px; z-index: 10; margin-bottom: 0;">${cat.name.split(' ')[0]}</span>
                     ${vocabVisuals[w.word]
                       ? `<div class="vocab-card-front-symbol" role="img" aria-label="${w.word} 연상 기호">${vocabVisuals[w.word]}</div>`
-                      : `<img src="${w.image}" class="vocab-card-front-img" alt="${w.word} 단어 힌트 그림" />`}
+                      : `<img src="${resolveAssetPath(w.image)}" class="vocab-card-front-img" alt="${w.word} 단어 힌트 그림" />`}
                     <button class="vocab-audio-btn" data-word="${w.word}" style="position: absolute; bottom: 8px; right: 8px; z-index: 10;">🔊</button>
                   </div>
                   <!-- Back face (Show Korean word and definitions) -->
@@ -540,7 +553,7 @@ function renderQuizCard(q, index) {
   
   let mediaHtml = '';
   if (q.image) {
-    mediaHtml = `<img src="${q.image}" alt="문항 삽화" class="quiz-image" />`;
+    mediaHtml = `<img src="${resolveAssetPath(q.image)}" alt="문항 삽화" class="quiz-image" />`;
   }
   
   let audioPlayerHtml = '';
@@ -986,7 +999,7 @@ function setupVocabGame(session) {
     cardEl.setAttribute('aria-label', card.isImage ? '어휘 매칭 그림' : `${card.text} 매칭 카드`);
 
     if (card.isImage) {
-      cardEl.innerHTML = `<img src="${card.text}" class="game-card-img" alt="매칭 그림" />`;
+      cardEl.innerHTML = `<img src="${resolveAssetPath(card.text)}" class="game-card-img" alt="매칭 그림" />`;
     } else {
       cardEl.innerText = card.text.replace(/<\/?[^>]+(>|$)/g, "");
     }
