@@ -1,4 +1,5 @@
 import { curriculumData } from './data/curriculum.js';
+import { prePracticeBySession } from './data/prePractice.js';
 
 // Application State
 let activeCurriculum = []; // Holds edited/customized curriculum
@@ -277,6 +278,63 @@ function renderSidebar() {
   });
 }
 
+function renderPrePractice(area, data, stepNumber) {
+  if (!data) return '';
+
+  const isReading = area === 'reading';
+  const languageItems = data.particles || data.expressions || [];
+  const languageTitle = isReading ? '조사·문법 핵심' : '듣기에 나오는 핵심 표현';
+
+  return `
+    <section class="pre-practice-card ${area}" aria-labelledby="${area}-prep-title">
+      <div class="pre-practice-heading">
+        <span class="learning-step-badge">${stepNumber}단계 · ${isReading ? '읽기 준비' : '듣기 준비'}</span>
+        <h3 id="${area}-prep-title">${isReading ? '📘' : '🎧'} ${data.title}</h3>
+        <p>${data.goal}</p>
+      </div>
+
+      <div class="knowledge-grid">
+        <div class="knowledge-panel">
+          <h4>① 문제에 나올 핵심 명사</h4>
+          <div class="knowledge-item-list">
+            ${data.nouns.map((item) => `
+              <article class="knowledge-item">
+                <strong>${item.word}</strong>
+                <span>${item.meaning}</span>
+                <small>${item.example}</small>
+              </article>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="knowledge-panel">
+          <h4>② ${languageTitle}</h4>
+          <div class="grammar-table-wrap">
+            <table class="grammar-table">
+              <thead><tr><th>형태</th><th>쓰임</th><th>예문</th></tr></thead>
+              <tbody>
+                ${languageItems.map((item) => `
+                  <tr><td><strong>${item.form}</strong></td><td>${item.use}</td><td>${item.example}</td></tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="strategy-panel">
+        <h4>③ 문제 풀이 전에 기억할 순서</h4>
+        <ol>${data.strategy.map((item) => `<li>${item}</li>`).join('')}</ol>
+      </div>
+
+      <details class="readiness-check">
+        <summary>④ 준비 확인 문제: ${data.check.question}</summary>
+        <p><strong>정답:</strong> ${data.check.answer}</p>
+      </details>
+    </section>
+  `;
+}
+
 // Load Session Contents (Timeline -> Vocab Warm-up -> Practice -> Mastery)
 function loadSession(index) {
   currentSessionIndex = index;
@@ -472,12 +530,32 @@ function loadSession(index) {
     `;
   }
   
-  // 2단계: 실전 훈련 (Actual Practice)
+  // 사전 지식 학습 후 영역별 실전 훈련
   if (session.practiceQuestions && session.practiceQuestions.length > 0) {
+    const knowledge = prePracticeBySession[session.id];
+    const indexedQuestions = session.practiceQuestions.map((question, questionIndex) => ({ question, questionIndex }));
+    const readingQuestions = indexedQuestions.filter(({ question }) => question.type === 'reading');
+    const listeningQuestions = indexedQuestions.filter(({ question }) => question.type === 'listening');
+
     html += `
+      ${renderPrePractice('reading', knowledge?.reading, 2)}
       <div class="quiz-section">
-        <h3 class="section-title-quiz">✍️ 2단계: 실전 훈련 (읽기 & 듣기연습)</h3>
-        ${session.practiceQuestions.map((q, qIdx) => renderQuizCard(q, qIdx)).join('')}
+        <div class="practice-transition">
+          <span>학습 완료 → 문제 적용</span>
+          <h3 class="section-title-quiz">✍️ 3단계: 읽기 문제집 풀기</h3>
+          <p>방금 익힌 명사와 조사를 표시하며 문제를 풀고, 제출 후 해설로 근거를 확인하세요.</p>
+        </div>
+        ${readingQuestions.map(({ question, questionIndex }) => renderQuizCard(question, questionIndex)).join('')}
+      </div>
+
+      ${renderPrePractice('listening', knowledge?.listening, 4)}
+      <div class="quiz-section">
+        <div class="practice-transition listening">
+          <span>학습 완료 → 듣고 적용</span>
+          <h3 class="section-title-quiz">🎧 5단계: 듣기 문제집 풀기</h3>
+          <p>보기를 먼저 읽고 핵심어를 예상한 뒤, 음성을 듣고 답을 선택하세요.</p>
+        </div>
+        ${listeningQuestions.map(({ question, questionIndex }) => renderQuizCard(question, questionIndex)).join('')}
       </div>
     `;
   }
@@ -487,8 +565,9 @@ function loadSession(index) {
     const mastery = session.vocabularyMastery;
     html += `
       <div class="vocab-mastery-card">
+        <span class="learning-step-badge review">6단계 · 마무리 복습</span>
         <h3 contenteditable="true" data-type="mastery" data-field="title">🎯 ${mastery.title}</h3>
-        <p class="desc" contenteditable="true" data-type="mastery" data-field="description">${mastery.description}</p>
+        <p class="desc" contenteditable="true" data-type="mastery" data-field="description">문제를 푼 뒤 틀린 문항의 명사·조사·핵심 표현을 다시 확인하세요. ${mastery.description}</p>
         
         <h4 style="margin-bottom: 0.75rem; font-weight: 700;">🏷️ 필수 명사 (Nouns)</h4>
         <div class="flashcard-grid" style="margin-bottom: 2rem;">

@@ -27,12 +27,14 @@ export const curriculumData = [
 
     // 상세 시간표 (Timeline)
     timeline: [
-      { time: "10분", activity: "도입 & TOPIK 소개", detail: "출석 체크, 지난 시간 복습 및 TOPIK I 시험 배점(200점 만점)과 1급(80점 이상) 합격 기준 오리엔테이션" },
-      { time: "30분", activity: "1단계: 핵심 어휘 학습", detail: "오늘의 주제 어휘(인물 👤, 장소 📍, 동사 🏃)의 핵심 단어 의미 학습 및 예문 낭독" },
-      { time: "35분", activity: "2단계: 읽기 실전 훈련", detail: "실제 TOPIK 기출 기반 읽기 문제 풀이 (서점 그림 매칭, 병원 빈칸 채우기) 및 격조사 해설" },
+      { time: "10분", activity: "도입 & TOPIK 소개", detail: "출석 체크, TOPIK I 시험 구조 안내 및 오늘의 학습 목표 확인" },
+      { time: "20분", activity: "1단계: 핵심 어휘 학습", detail: "인물·장소·동작 명사를 그림 카드와 예문으로 학습" },
+      { time: "15분", activity: "2단계: 읽기 전 지식 학습", detail: "시장·도서관 등 문제 명사와 은/는, 이/가, 을/를, 에/에서, 과/와 학습" },
+      { time: "25분", activity: "3단계: 읽기 문제 풀이", detail: "배운 명사와 조사를 문제에 표시하며 읽기 문제집 풀이 및 해설 확인" },
       { time: "10분", activity: "쉬는 시간", detail: "중간 휴식 시간" },
-      { time: "25분", activity: "3단계: 듣기 실전 훈련", detail: "실제 TOPIK 기출 기반 듣기 문제 청취 (약국 대화, 카페 주문 그림) 및 쉐도잉 훈련" },
-      { time: "10분", activity: "마무리 정리 & 복습", detail: "오늘 배운 핵심 명사 10개, 동사 10개 플래시카드로 암기 여부 최종 테스트" }
+      { time: "15분", activity: "4단계: 듣기 전 지식 학습", detail: "장소 단서 명사와 주세요, 어디에 가요, 무엇을 해요 표현 학습" },
+      { time: "15분", activity: "5단계: 듣기 문제 풀이", detail: "보기 핵심어를 먼저 확인한 뒤 듣기 문제집 풀이" },
+      { time: "10분", activity: "6단계: 마무리 복습", detail: "오답의 명사·조사·표현을 다시 확인하고 플래시카드로 최종 점검" }
     ],
     
     // 1단계: 단위 공부 (Vocab Warm-up)
@@ -354,7 +356,7 @@ export const curriculumData = [
 
     // 3단계: 마무리 장악 (Vocabulary Mastery)
     vocabularyMastery: {
-      title: "3단계: 마무리 정리 (오늘 꼭 복습할 명사 & 동사)",
+      title: "6단계: 마무리 정리 (오늘 꼭 복습할 명사 & 동사)",
       description: "오늘 배운 어휘 중 핵심 단어 20개입니다. 카드를 클릭하여 뜻을 확인하고 확실히 암기했는지 체크하세요.",
       nouns: [
         { word: "학생", meaning: "Student" },
@@ -390,12 +392,14 @@ export const curriculumData = [
     
     // 상세 시간표 (Timeline)
     timeline: [
-      { time: "10분", activity: "도입 & 1회차 복습", detail: "지난 시간에 배운 인물, 장소, 기본 어휘 20개 퀴즈식 복습 및 오늘 수업의 쇼핑/물건 표현 학습 준비" },
-      { time: "30분", activity: "1단계: 핵심 어휘 학습", detail: "오늘의 주제 어휘 (물건 🛍️, 단위/화폐 🪙, 쇼핑 동사 🛒) 핵심 명사/동사 의미와 조사 결합 형태 파악" },
-      { time: "35분", activity: "2단계: 읽기 실전 훈련", detail: "실제 TOPIK 기출 기반 읽기 문제 풀이 (미술관 안내판 해석, 과거시제 결합) 및 풀이법 설명" },
+      { time: "10분", activity: "도입 & 1회차 복습", detail: "지난 시간 핵심 어휘·조사 확인 및 쇼핑 주제 학습 준비" },
+      { time: "20분", activity: "1단계: 핵심 어휘 학습", detail: "물건·단위·화폐·쇼핑 동사를 그림과 예문으로 학습" },
+      { time: "15분", activity: "2단계: 읽기 전 지식 학습", detail: "입장 요금·이용 시간·단위 명사와 조사·과거형 학습" },
+      { time: "25분", activity: "3단계: 읽기 문제 풀이", detail: "안내문의 숫자·요일·가격을 표시하며 읽기 문제집 풀이" },
       { time: "10분", activity: "쉬는 시간", detail: "중간 휴식 시간" },
-      { time: "25분", activity: "3단계: 듣기 실전 훈련", detail: "실제 TOPIK 기출 기반 듣기 문제 청취 (첫인상 인사, 컴퓨터 수리 일치) 및 쉐도잉 훈련" },
-      { time: "10분", activity: "마무리 정리 & 복습", detail: "오늘 배운 쇼핑/물건 명사 10개, 생활 동사 10개 플래시카드로 자가진단 및 복습" }
+      { time: "15분", activity: "4단계: 듣기 전 지식 학습", detail: "가격·영수증·사이즈·교환 명사와 쇼핑 요청 표현 학습" },
+      { time: "15분", activity: "5단계: 듣기 문제 풀이", detail: "요청과 응답, 변경된 정보를 구분하며 듣기 문제집 풀이" },
+      { time: "10분", activity: "6단계: 마무리 복습", detail: "오답 어휘와 표현을 플래시카드로 다시 확인" }
     ],
     
     // 1단계: 단위 공부 (Vocab Warm-up)
@@ -707,7 +711,7 @@ export const curriculumData = [
 
     // 3단계: 마무리 장악 (Vocabulary Mastery)
     vocabularyMastery: {
-      title: "3단계: 마무리 정리 (오늘 꼭 복습할 명사 & 동사)",
+      title: "6단계: 마무리 정리 (오늘 꼭 복습할 명사 & 동사)",
       description: "오늘 배운 어휘 중 핵심 단어 20개입니다. 카드를 클릭하여 뜻을 확인하고 확실히 암기했는지 체크하세요.",
       nouns: [
         { word: "옷", meaning: "Clothes" },
@@ -743,12 +747,14 @@ export const curriculumData = [
     
     // 상세 시간표 (Timeline)
     timeline: [
-      { time: "10분", activity: "도입 & 2회차 복습", detail: "지난 시간의 물건, 단위, 쇼핑 관련 어휘 20개 구두 테스트 및 오늘 다룰 일정/시간/상태 표현 안내" },
-      { time: "30분", activity: "1단계: 핵심 어휘 학습", detail: "오늘의 주제 어휘 (시간/날씨 명사 📅, 상태 형용사 🌡️, 계획 동사 🗺️)의 뉘앙스 파악 및 구문 활용" },
-      { time: "35분", activity: "2단계: 읽기 실전 훈련", detail: "실제 TOPIK 기출 기반 읽기 문제 풀이 (요일 약속 메모 해석, 감기 지문 내용 일치) 및 주제 도출법 해설" },
+      { time: "10분", activity: "도입 & 2회차 복습", detail: "지난 시간 쇼핑 어휘·표현 확인 및 일정·날씨 주제 준비" },
+      { time: "20분", activity: "1단계: 핵심 어휘 학습", detail: "시간·날씨 명사, 상태 형용사, 계획 동사를 예문으로 학습" },
+      { time: "15분", activity: "2단계: 읽기 전 지식 학습", detail: "주말·약속·일정 명사와 시간 조사, 미래 계획 표현 학습" },
+      { time: "25분", activity: "3단계: 읽기 문제 풀이", detail: "시간축과 장소를 표시하며 중심 생각·일정표 문제 풀이" },
       { time: "10분", activity: "쉬는 시간", detail: "중간 휴식 시간" },
-      { time: "25분", activity: "3단계: 듣기 실전 훈련", detail: "실제 TOPIK 기출 기반 듣기 문제 청취 (주말 계획 대답, 비오는 날 빨래 걷기) 및 상황 추론 훈련" },
-      { time: "10분", activity: "마무리 정리 & 복습", detail: "오늘 배운 시간/상태 명사 10개, 상태 동사/형용사 10개 플래시카드로 자가테스트" }
+      { time: "15분", activity: "4단계: 듣기 전 지식 학습", detail: "날씨·약속 변경 명사와 이유·조건 표현 학습" },
+      { time: "15분", activity: "5단계: 듣기 문제 풀이", detail: "원래 시간·변경 시간·이유를 메모하며 듣기 문제집 풀이" },
+      { time: "10분", activity: "6단계: 마무리 복습", detail: "틀린 문제의 시간·조사·계획 표현을 최종 복습" }
     ],
     
     // 1단계: 단위 공부 (Vocab Warm-up)
@@ -1076,7 +1082,7 @@ export const curriculumData = [
 
     // 3단계: 마무리 장악 (Vocabulary Mastery)
     vocabularyMastery: {
-      title: "3단계: 마무리 정리 (오늘 꼭 복습할 명사 & 동사)",
+      title: "6단계: 마무리 정리 (오늘 꼭 복습할 명사 & 동사)",
       description: "날씨, 일정 조정, 상태 설명 등에 필수적인 핵심 10개 명사 및 10개 동사입니다.",
       nouns: [
         { word: "오늘", meaning: "Today" },

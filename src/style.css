@@ -256,9 +256,26 @@ header {
 
   .session-header,
   .vocab-warmup-card,
+  .pre-practice-card,
   .quiz-card,
   .vocab-mastery-card {
     padding: calc(1.15rem * var(--font-scale));
+  }
+
+  .knowledge-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .knowledge-item {
+    grid-template-columns: 1fr;
+  }
+
+  .knowledge-item small {
+    grid-column: auto;
+  }
+
+  .grammar-table {
+    min-width: 560px;
   }
 
   .audio-controls {
@@ -606,6 +623,196 @@ header {
   padding: 0.35rem 0.6rem;
   border-radius: 4px;
   border-left: 3px solid var(--secondary-light);
+}
+
+/* 문제 풀이 전 사전 지식 학습 */
+.pre-practice-card {
+  background: linear-gradient(145deg, #eff6ff 0%, #ffffff 72%);
+  border: 2px solid #93c5fd;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: calc(2rem * var(--font-scale));
+}
+
+.pre-practice-card.listening {
+  background: linear-gradient(145deg, #f0fdfa 0%, #ffffff 72%);
+  border-color: #5eead4;
+}
+
+.pre-practice-heading h3 {
+  color: #1d4ed8;
+  font-size: calc(1.45rem * var(--font-scale));
+  margin: 0.65rem 0 0.45rem;
+}
+
+.pre-practice-card.listening .pre-practice-heading h3 {
+  color: #0f766e;
+}
+
+.pre-practice-heading p,
+.practice-transition p {
+  color: #475569;
+  line-height: 1.65;
+}
+
+.learning-step-badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1e40af;
+  font-size: calc(0.82rem * var(--font-scale));
+  font-weight: 800;
+}
+
+.learning-step-badge.review {
+  background: #fef3c7;
+  color: #92400e;
+  margin-bottom: 0.7rem;
+}
+
+.knowledge-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(420px, 1.4fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.knowledge-panel,
+.strategy-panel {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  padding: 1.15rem;
+}
+
+.knowledge-panel h4,
+.strategy-panel h4 {
+  color: #0f172a;
+  font-size: calc(1.03rem * var(--font-scale));
+  margin-bottom: 0.85rem;
+}
+
+.knowledge-item-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.knowledge-item {
+  display: grid;
+  grid-template-columns: minmax(90px, auto) 1fr;
+  gap: 0.2rem 0.7rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px dashed #cbd5e1;
+}
+
+.knowledge-item:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.knowledge-item strong {
+  color: #1d4ed8;
+}
+
+.pre-practice-card.listening .knowledge-item strong {
+  color: #0f766e;
+}
+
+.knowledge-item span {
+  color: #334155;
+}
+
+.knowledge-item small {
+  grid-column: 1 / -1;
+  color: #64748b;
+}
+
+.grammar-table-wrap {
+  overflow-x: auto;
+}
+
+.grammar-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: calc(0.92rem * var(--font-scale));
+}
+
+.grammar-table th,
+.grammar-table td {
+  padding: 0.65rem;
+  border: 1px solid #dbe3ee;
+  text-align: left;
+  vertical-align: top;
+}
+
+.grammar-table th {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.strategy-panel {
+  margin-top: 1.25rem;
+}
+
+.strategy-panel ol {
+  margin: 0;
+  padding-left: 1.4rem;
+  color: #334155;
+  line-height: 1.8;
+}
+
+.readiness-check {
+  margin-top: 1rem;
+  border-radius: var(--radius-sm);
+  background: #1e3a8a;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.pre-practice-card.listening .readiness-check {
+  background: #115e59;
+}
+
+.readiness-check summary {
+  cursor: pointer;
+  padding: 0.9rem 1rem;
+  font-weight: 750;
+}
+
+.readiness-check p {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  line-height: 1.6;
+}
+
+.practice-transition {
+  background: #eef2ff;
+  border-left: 5px solid #4f46e5;
+  border-radius: var(--radius-sm);
+  padding: 1.1rem 1.25rem;
+}
+
+.practice-transition.listening {
+  background: #ecfeff;
+  border-left-color: #0891b2;
+}
+
+.practice-transition > span {
+  color: #4338ca;
+  font-size: calc(0.82rem * var(--font-scale));
+  font-weight: 800;
+}
+
+.practice-transition.listening > span {
+  color: #0e7490;
+}
+
+.practice-transition .section-title-quiz {
+  margin-top: 0.35rem;
+  border-bottom: 0;
+  padding-bottom: 0;
 }
 
 /* 2단계: 실전 훈련 (Actual Practice) Style */
@@ -1491,6 +1698,36 @@ footer {
   font-size: calc(0.9rem * var(--font-scale));
 }
 
+/* 새 사전 학습 영역은 기본 규칙 뒤에서 모바일 폭을 다시 확정합니다. */
+@media (max-width: 600px) {
+  .content-area,
+  .pre-practice-card,
+  .knowledge-panel,
+  .strategy-panel {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .knowledge-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .knowledge-item {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .grammar-table-wrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .grammar-table {
+    min-width: 520px;
+  }
+}
+
 /* ==========================================================================
    🖨️ PDF 인쇄용 전용 스타일시트 (A4 포맷 최적화)
    ========================================================================== */
@@ -1536,6 +1773,7 @@ footer {
   .session-header,
   .timeline-card,
   .vocab-warmup-card,
+  .pre-practice-card,
   .quiz-card,
   .vocab-mastery-card {
     background-color: #ffffff !important;
