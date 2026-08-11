@@ -2,12 +2,12 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/topic/assets/favicon-Bs_r76O8.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TOPIK I (1급) 3회 완성 특강</title>
     <!-- Stylesheet -->
-    <script type="module" crossorigin src="/topic/assets/index-ClM1gquN.js"></script>
-    <link rel="stylesheet" crossorigin href="/topic/assets/index-C0oJG3Vu.css">
+    <script type="module" crossorigin src="/topic/assets/index-Dq0GRZDw.js"></script>
+    <link rel="stylesheet" crossorigin href="/topic/assets/index-Ccgyx1P7.css">
   </head>
   <body>
     <div id="app">
@@ -24,6 +24,11 @@
               🔑 강사 모드 OFF
             </button>
 
+            <!-- Live translation popup -->
+            <button class="zoom-toggle-btn" id="translation-popup-btn" style="background: linear-gradient(135deg, #0f766e, #0891b2);">
+              🌐 실시간 번역
+            </button>
+
             <!-- PDF Download -->
             <button class="zoom-toggle-btn" id="pdf-print-btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
               📄 PDF 다운로드
@@ -36,11 +41,11 @@
 
             <!-- Zoom Presentation Mode Toggle -->
             <button class="zoom-toggle-btn" id="zoom-toggle">
-              🖥️ 줌 화면 공유 모드 ON
+              🖥️ PPT 발표 모드
             </button>
             
             <div class="progress-wrapper">
-              <div class="progress-text" id="progress-percent">학습 진도: 33%</div>
+              <div class="progress-text" id="progress-percent">회차 진도: 33%</div>
               <div class="progress-bar-bg">
                 <div class="progress-bar-fill" id="progress-bar" style="width: 33.33%;"></div>
               </div>
@@ -53,7 +58,7 @@
       <section class="hero">
         <div class="hero-content">
           <h1>TOPIK I (1급) 3회 완성 초고속 특강</h1>
-          <p>하루 2시간씩 총 3회! 단위 공부와 읽기/듣기 실전 훈련, 핵심 어휘 장악까지 완벽 구성.</p>
+          <p>하루 2시간씩 총 3회! 핵심 어휘 학습과 읽기·듣기 실전 훈련, 마무리 복습까지 체계적으로 구성했습니다.</p>
         </div>
       </section>
 
@@ -76,9 +81,46 @@
       <!-- Footer -->
       <footer>
         <p>&copy; 2026 TOPIK-Edu Smart Academy. All rights reserved.</p>
-        <p style="font-size: 0.8rem; margin-top: 0.5rem;">본 플랫폼은 TOPIK I 시험 규격 및 기출 삽화를 재현한 모의 학습 플랫폼입니다.</p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem;">본 플랫폼은 TOPIK I PBT 문항 유형을 참고해 자체 제작한 모의 학습 자료입니다.</p>
       </footer>
     </div>
+
+    <nav id="presentation-controls" class="presentation-controls" aria-label="문제 슬라이드 이동" hidden>
+      <button id="presentation-prev" type="button" aria-label="이전 문제">← 이전</button>
+      <strong id="presentation-counter" class="presentation-counter" aria-live="polite">문제 1 / 1</strong>
+      <button id="presentation-next" type="button" aria-label="다음 문제">다음 →</button>
+      <span class="presentation-key-hint">← → 키로 이동 · ESC 종료</span>
+    </nav>
+
+    <dialog id="translation-dialog" class="translation-dialog" aria-labelledby="translation-dialog-title">
+      <div class="translation-dialog-header">
+        <div>
+          <strong id="translation-dialog-title">🌐 TOPIK 실시간 번역 수업방</strong>
+          <p>교안을 보면서 번역과 TTS를 함께 사용할 수 있습니다.</p>
+        </div>
+        <button id="translation-dialog-close" class="translation-dialog-close" type="button" aria-label="번역 팝업 닫기">✕</button>
+      </div>
+
+      <div id="translation-connect-panel" class="translation-connect-panel">
+        <div class="translation-connect-icon" aria-hidden="true">🔗</div>
+        <h2>번역 수업방 연결</h2>
+        <p>Google Apps Script로 공개 배포한 번역 웹앱 주소를 한 번만 입력하세요. 이 기기에 저장됩니다.</p>
+        <label for="translation-app-url">번역 웹앱 주소</label>
+        <div class="translation-url-row">
+          <input id="translation-app-url" type="url" inputmode="url" placeholder="https://script.google.com/macros/s/.../exec" autocomplete="off">
+          <button id="translation-url-save" type="button">연결하기</button>
+        </div>
+        <p id="translation-url-status" class="translation-url-status" role="status"></p>
+      </div>
+
+      <div id="translation-frame-panel" class="translation-frame-panel" hidden>
+        <div class="translation-frame-actions">
+          <button id="translation-url-change" type="button">주소 변경</button>
+          <a id="translation-new-window" href="#" target="_blank" rel="noopener noreferrer">새 창으로 열기 ↗</a>
+        </div>
+        <iframe id="translation-frame" title="TOPIK 실시간 번역 수업방" allow="clipboard-write" loading="lazy"></iframe>
+      </div>
+    </dialog>
 
     <!-- Main JavaScript Entry -->
   </body>
