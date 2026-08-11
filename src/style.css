@@ -205,6 +205,74 @@ header {
   }
 }
 
+@media (max-width: 600px) {
+  header {
+    position: static;
+    padding: 0.85rem 1rem;
+  }
+
+  .header-container,
+  .header-controls {
+    width: 100%;
+  }
+
+  .header-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .zoom-toggle-btn {
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+    padding: 0.55rem 0.6rem;
+  }
+
+  .progress-wrapper {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .hero {
+    padding: 1.4rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: calc(1.6rem * var(--font-scale));
+  }
+
+  .main-container {
+    margin: 1rem 0;
+    padding: 0 0.75rem;
+    gap: 1.25rem;
+  }
+
+  .sidebar {
+    min-width: 0;
+    padding: 1rem;
+    position: static;
+  }
+
+  .session-header,
+  .vocab-warmup-card,
+  .quiz-card,
+  .vocab-mastery-card {
+    padding: calc(1.15rem * var(--font-scale));
+  }
+
+  .audio-controls {
+    align-items: stretch;
+  }
+
+  .play-btn,
+  .script-toggle-btn,
+  .speed-select {
+    width: 100%;
+    min-height: 44px;
+  }
+}
+
 /* Sidebar Navigation (Left menu bar placed precisely to the left) */
 .sidebar {
   background-color: var(--card-bg);
@@ -1171,6 +1239,17 @@ header {
   border-radius: inherit;
 }
 
+.vocab-card-front-symbol {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #eef2ff, #ccfbf1);
+  font-size: calc(4rem * var(--font-scale));
+  line-height: 1;
+}
+
 .vocab-card-back {
   background-color: var(--primary-color);
   color: #ffffff;
@@ -1301,6 +1380,14 @@ header {
   justify-content: center;
   align-items: center;
   position: relative;
+  font-family: inherit;
+}
+
+.vocab-card-wrapper:focus-visible,
+.flashcard-wrapper:focus-visible,
+.game-card:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 3px;
 }
 
 .game-card.game-card-image-type {

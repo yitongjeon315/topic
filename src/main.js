@@ -20,6 +20,22 @@ let isTimelineOpen = true;
 let isIntroOpen = true;
 let isInstructorMode = false; // Instructor guide hidden by default
 
+const vocabVisuals = {
+  '옷': '👕', '신발': '👟', '과일': '🍎', '우산': '☂️',
+  '돈': '💵', '원': '₩', '잔': '☕', '개': '📦',
+  '사다': '🛍️', '팔다': '🏷️', '빌리다': '📚', '주다': '🎁',
+  '오늘': '📅', '내일': '⏭️', '주말': '🗓️', '비': '🌧️',
+  '아프다': '🤒', '피곤하다': '😴', '바쁘다': '🏃', '맑다': '☀️',
+  '쉬다': '🛋️', '약속하다': '🤝', '생각하다': '🤔', '사오다': '🛍️'
+};
+
+const requiredQuestionCorrections = {
+  q1_r3: ['options', 'optionExplanations'],
+  q2_r1: ['explanation'],
+  q2_r2: ['question'],
+  q3_l4: ['audioScript', 'optionExplanations']
+};
+
 // DOM Elements
 const navContainer = document.getElementById('curriculum-nav');
 const contentContainer = document.getElementById('session-content');
@@ -112,9 +128,24 @@ function loadLocalCurriculum() {
               }
             });
           }
+
+          session.practiceQuestions.forEach((question) => {
+            const freshQuestion = curriculumData[idx].practiceQuestions.find(item => item.id === question.id);
+            const fieldsToSync = requiredQuestionCorrections[question.id];
+            if (freshQuestion && fieldsToSync) {
+              fieldsToSync.forEach((field) => {
+                question[field] = JSON.parse(JSON.stringify(freshQuestion[field]));
+              });
+            }
+          });
+        }
+
+        if (session.topikIntro && curriculumData[idx]?.topikIntro) {
+          session.topikIntro.title = curriculumData[idx].topikIntro.title;
+          session.topikIntro.sections = JSON.parse(JSON.stringify(curriculumData[idx].topikIntro.sections));
+          session.topikIntro.tips = JSON.parse(JSON.stringify(curriculumData[idx].topikIntro.tips));
         }
       });
-      saveLocalCurriculum();
     } catch (e) {
       console.error('LocalStorage load error, reverting to default:', e);
       activeCurriculum = JSON.parse(JSON.stringify(curriculumData));
@@ -122,6 +153,33 @@ function loadLocalCurriculum() {
   } else {
     activeCurriculum = JSON.parse(JSON.stringify(curriculumData));
   }
+
+  normalizeCurriculumLabels();
+  if (saved) saveLocalCurriculum();
+}
+
+function normalizeCurriculumLabels() {
+  activeCurriculum.forEach((session) => {
+    session.timeline?.forEach((item) => {
+      item.activity = item.activity.replaceAll('단위 공부', '핵심 어휘 학습').replaceAll('장악', '복습');
+    });
+
+    if (session.vocabWarmUp) {
+      session.vocabWarmUp.title = session.vocabWarmUp.title.replaceAll('단위 공부', '핵심 어휘 학습');
+      session.vocabWarmUp.instructorGuide = session.vocabWarmUp.instructorGuide?.replaceAll('단위 공부', '핵심 어휘 학습');
+    }
+
+    if (session.vocabularyMastery) {
+      session.vocabularyMastery.title = session.vocabularyMastery.title.replaceAll('장악해야 할', '복습할');
+    }
+
+    session.practiceQuestions?.forEach((question) => {
+      question.category = question.category
+        .replace('추가 기출', '추가 모의문항')
+        .replace(/ 기출$/, ' 기출 유형');
+      question.question = question.question.replaceAll('(TOPIK I 기출)', '(TOPIK I 기출 유형)');
+    });
+  });
 }
 
 // Save all current edits to LocalStorage
@@ -214,7 +272,7 @@ function loadSession(index) {
   // Update Progress Bar
   const progressPercent = Math.round(((index + 1) / activeCurriculum.length) * 100);
   progressBarFill.style.width = `${progressPercent}%`;
-  progressPercentText.innerText = `학습 진도: ${progressPercent}%`;
+  progressPercentText.innerText = `회차 진도: ${progressPercent}%`;
   
   // Header (Editable Title)
   let html = `
@@ -353,12 +411,14 @@ function loadSession(index) {
           <h4 contenteditable="true" data-type="warmup-cat" data-cidx="${catIdx}" style="margin-bottom: 0.75rem; font-weight: 700;">${cat.name}</h4>
           <div class="vocab-card-grid">
             ${cat.words.map((w, wIdx) => `
-              <div class="vocab-card-wrapper">
+              <div class="vocab-card-wrapper" role="button" tabindex="0" aria-label="${w.word} 어휘 카드 뒤집기">
                 <div class="vocab-card" id="vocab-card-${catIdx}-${wIdx}">
                   <!-- Front face (Show image only for quiz-style learning) -->
                   <div class="vocab-card-front" style="padding: 0; overflow: hidden; position: relative;">
                     <span class="word-badge" style="position: absolute; top: 8px; left: 8px; z-index: 10; margin-bottom: 0;">${cat.name.split(' ')[0]}</span>
-                    <img src="${w.image}" class="vocab-card-front-img" alt="단어 힌트 그림" />
+                    ${vocabVisuals[w.word]
+                      ? `<div class="vocab-card-front-symbol" role="img" aria-label="${w.word} 연상 기호">${vocabVisuals[w.word]}</div>`
+                      : `<img src="${w.image}" class="vocab-card-front-img" alt="${w.word} 단어 힌트 그림" />`}
                     <button class="vocab-audio-btn" data-word="${w.word}" style="position: absolute; bottom: 8px; right: 8px; z-index: 10;">🔊</button>
                   </div>
                   <!-- Back face (Show Korean word and definitions) -->
@@ -420,7 +480,7 @@ function loadSession(index) {
         <h4 style="margin-bottom: 0.75rem; font-weight: 700;">🏷️ 필수 명사 (Nouns)</h4>
         <div class="flashcard-grid" style="margin-bottom: 2rem;">
           ${mastery.nouns.map((item, nIdx) => `
-            <div class="flashcard-wrapper">
+            <div class="flashcard-wrapper" role="button" tabindex="0" aria-label="${item.word} 뜻 확인">
               <div class="flashcard" data-meaning="${item.meaning}">
                 <div class="flashcard-front">
                   <span class="word-type">명사</span>
@@ -438,7 +498,7 @@ function loadSession(index) {
         <h4 style="margin-bottom: 0.75rem; font-weight: 700;">🏃 필수 동사/형용사 (Verbs & Adjectives)</h4>
         <div class="flashcard-grid">
           ${mastery.verbs.map((item, vIdx) => `
-            <div class="flashcard-wrapper">
+            <div class="flashcard-wrapper" role="button" tabindex="0" aria-label="${item.word} 뜻 확인">
               <div class="flashcard" data-meaning="${item.meaning}">
                 <div class="flashcard-front">
                   <span class="word-type">동사/형용사</span>
@@ -457,6 +517,11 @@ function loadSession(index) {
   }
   
   contentContainer.innerHTML = html;
+
+  // Student mode is read-only. Editing is enabled only when instructor mode is on.
+  contentContainer.querySelectorAll('[contenteditable]').forEach((element) => {
+    element.setAttribute('contenteditable', isInstructorMode ? 'true' : 'false');
+  });
   
   // Event Bindings
   bindSessionEvents(session);
@@ -489,7 +554,7 @@ function renderQuizCard(q, index) {
           <div class="play-status" id="play-status-${q.id}">준비됨 (TOPIK 표준 속도)</div>
           <select class="speed-select" id="speed-select-${q.id}">
             <option value="0.7">0.7x (느리게)</option>
-            <option value="0.9" selected>0.9x (TOPIK 추천)</option>
+            <option value="0.9" selected>0.9x (연습 권장)</option>
             <option value="1.1">1.1x (약간 빠르게)</option>
           </select>
           <button class="script-toggle-btn" id="script-btn-${q.id}" data-qid="${q.id}">대사 보기</button>
@@ -571,7 +636,7 @@ function renderQuizCard(q, index) {
   return `
     <div class="quiz-card ${isSubmitted ? 'answered' : ''}" id="quiz-card-${q.id}">
       <div class="quiz-header">
-        <span class="question-num">문제 0${index + 1}</span>
+        <span class="question-num">문제 ${String(index + 1).padStart(2, '0')}</span>
         <span class="question-category" contenteditable="true" data-type="quiz" data-qid="${q.id}" data-field="category">${q.category}</span>
       </div>
       ${audioPlayerHtml}
@@ -618,7 +683,7 @@ function bindSessionEvents(session) {
 
   // 0.2 1단계: 단위 공부 어휘 플래시카드 뒤집기 & TTS 발음 연동
   document.querySelectorAll('.vocab-card-wrapper').forEach(wrapper => {
-    wrapper.addEventListener('click', (e) => {
+    const toggleVocabCard = (e) => {
       // If user is editing text (contenteditable), do not flip
       if (e.target.hasAttribute('contenteditable')) return;
       
@@ -634,6 +699,13 @@ function bindSessionEvents(session) {
       const card = wrapper.querySelector('.vocab-card');
       if (card) {
         card.classList.toggle('flipped');
+      }
+    };
+    wrapper.addEventListener('click', toggleVocabCard);
+    wrapper.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleVocabCard(e);
       }
     });
   });
@@ -706,11 +778,18 @@ function bindSessionEvents(session) {
 
   // 4. Flashcard flip handlers (3단계 마무리 장악)
   document.querySelectorAll('.flashcard-wrapper').forEach(wrapper => {
-    wrapper.addEventListener('click', (e) => {
+    const toggleMasteryCard = (e) => {
       if (e.target.hasAttribute('contenteditable')) return;
       const card = wrapper.querySelector('.flashcard');
       if (card) {
         card.classList.toggle('flipped');
+      }
+    };
+    wrapper.addEventListener('click', toggleMasteryCard);
+    wrapper.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMasteryCard(e);
       }
     });
   });
@@ -749,6 +828,10 @@ function rebindCardEvents(qid, question, session) {
   // Rebind contenteditable blur triggers
   const cardElement = document.getElementById(`quiz-card-${qid}`);
   if (cardElement) {
+    cardElement.querySelectorAll('[contenteditable]').forEach((element) => {
+      element.setAttribute('contenteditable', isInstructorMode ? 'true' : 'false');
+    });
+
     cardElement.querySelectorAll('[contenteditable="true"]').forEach(el => {
       el.addEventListener('blur', () => {
         updateCurriculumData(el);
@@ -891,7 +974,8 @@ function setupVocabGame(session) {
 
   // Render cards to game grid
   cards.forEach((card, index) => {
-    const cardEl = document.createElement('div');
+    const cardEl = document.createElement('button');
+    cardEl.type = 'button';
     cardEl.className = 'game-card';
     if (card.isImage) {
       cardEl.classList.add('game-card-image-type');
@@ -899,6 +983,7 @@ function setupVocabGame(session) {
     cardEl.dataset.key = card.key;
     cardEl.dataset.type = card.type;
     cardEl.dataset.index = index;
+    cardEl.setAttribute('aria-label', card.isImage ? '어휘 매칭 그림' : `${card.text} 매칭 카드`);
 
     if (card.isImage) {
       cardEl.innerHTML = `<img src="${card.text}" class="game-card-img" alt="매칭 그림" />`;

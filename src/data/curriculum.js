@@ -7,7 +7,7 @@ export const curriculumData = [
     
     // 국립국제교육원 TOPIK 공식 소개 규정
     topikIntro: {
-      title: "🔎 국립국제교육원 TOPIK I 공식 규정 및 시험 안내",
+      title: "🔎 국립국제교육원 TOPIK I PBT 시험 안내",
       purpose: "한국어를 모국어로 하지 않는 재외동포 및 외국인의 한국어 학습 방향 제시 및 한국어 사용 능력을 측정하여 유학, 취업 등에 활용하는 것을 목적으로 합니다.",
       target: "재외동포 및 외국인 (한국 내 대학 입학, 비자 취득, 해외 기업 취업 등 희망자)",
       levels: [
@@ -19,7 +19,8 @@ export const curriculumData = [
         { area: "읽기 (Reading)", questions: "40문항", score: "100점", time: "60분", format: "4지선다형 객관식" }
       ],
       tips: [
-        "TOPIK I은 1교시 단일 교시로 구성되며, 중간에 쉬는 시간 없이 총 100분 동안 진행됩니다.",
+        "이 표는 TOPIK I PBT 기준입니다. PBT는 1교시 단일 교시로 구성되며, 중간에 쉬는 시간 없이 총 100분 동안 진행됩니다.",
+        "TOPIK I IBT는 문항 수·시험 시간·점수 체계가 다르므로 응시 방식에 맞는 최신 공식 공고를 반드시 확인하십시오.",
         "오답에 대한 감점 제도가 없으므로, 모든 문항의 답안을 반드시 채우는 것이 고득점에 유리합니다."
       ]
     },
@@ -27,18 +28,18 @@ export const curriculumData = [
     // 상세 시간표 (Timeline)
     timeline: [
       { time: "10분", activity: "도입 & TOPIK 소개", detail: "출석 체크, 지난 시간 복습 및 TOPIK I 시험 배점(200점 만점)과 1급(80점 이상) 합격 기준 오리엔테이션" },
-      { time: "30분", activity: "1단계: 단위 공부", detail: "오늘의 주제 어휘(인물 👤, 장소 📍, 동사 🏃)의 핵심 단어 의미 학습 및 예문 낭독" },
+      { time: "30분", activity: "1단계: 핵심 어휘 학습", detail: "오늘의 주제 어휘(인물 👤, 장소 📍, 동사 🏃)의 핵심 단어 의미 학습 및 예문 낭독" },
       { time: "35분", activity: "2단계: 읽기 실전 훈련", detail: "실제 TOPIK 기출 기반 읽기 문제 풀이 (서점 그림 매칭, 병원 빈칸 채우기) 및 격조사 해설" },
       { time: "10분", activity: "쉬는 시간", detail: "중간 휴식 시간" },
       { time: "25분", activity: "3단계: 듣기 실전 훈련", detail: "실제 TOPIK 기출 기반 듣기 문제 청취 (약국 대화, 카페 주문 그림) 및 쉐도잉 훈련" },
-      { time: "10분", activity: "마무리 정리 & 장악", detail: "오늘 배운 핵심 명사 10개, 동사 10개 플래시카드로 암기 여부 최종 테스트" }
+      { time: "10분", activity: "마무리 정리 & 복습", detail: "오늘 배운 핵심 명사 10개, 동사 10개 플래시카드로 암기 여부 최종 테스트" }
     ],
     
     // 1단계: 단위 공부 (Vocab Warm-up)
     vocabWarmUp: {
-      title: "1단계: 단위 공부 (오늘의 핵심 기초 어휘)",
+      title: "1단계: 핵심 어휘 학습 (오늘의 기초 어휘)",
       description: "그림 카드를 보고 어떤 인물, 장소, 동작인지 유추한 뒤 카드를 클릭하여 한글 단어를 확인해보세요.",
-      instructorGuide: "<strong>[단위 공부 교수 가이드]</strong><br>- 학생들에게 카드의 '그림'만 보여주고 한글 단어(학생, 의사, 병원 등)를 큰 소리로 외쳐보게 유도하십시오.<br>- 단어 발음 듣기 🔊 버튼을 눌러 원어민 발음을 들려주고 함께 쉐도잉 훈련을 하세요.<br>- 카드를 클릭하여 뒤집어 뒷면의 뜻과 예문을 소리 내 낭독하게 하십시오.",
+      instructorGuide: "<strong>[핵심 어휘 학습 교수 가이드]</strong><br>- 학생들에게 카드의 그림이나 기호만 보여주고 한글 단어(학생, 의사, 병원 등)를 큰 소리로 말하게 유도하십시오.<br>- 단어 발음 듣기 🔊 버튼을 눌러 한국어 발음을 들려주고 함께 따라 말하게 하세요.<br>- 카드를 클릭하여 뒤집어 뒷면의 뜻과 예문을 소리 내 낭독하게 하십시오.",
       categories: [
         {
           name: "👤 인물 명사 (People)",
@@ -121,13 +122,13 @@ export const curriculumData = [
         category: "읽기 (Reading) 추가 기출",
         question: "다음 그림 상황에 들어맞는 문장으로 가장 알맞은 것을 고르십시오.",
         image: "topik_doctor_scene.jpg",
-        options: ["진료를 받습니다.", "장난감을 놉니다.", "공부를 가르칩니다.", "요리를 시킵니다."],
+        options: ["진료를 받습니다.", "장난감을 가지고 놉니다.", "공부를 가르칩니다.", "요리를 시킵니다."],
         correct: 0,
         explanation: "의사 가운을 입은 의사가 병실에서 환자를 성심껏 돌보며 대화하는 모습이므로, 병원에서 치료를 받거나 **진료를 받습니다**가 가장 정확합니다.",
         instructorGuide: "<strong>[읽기 3번 교수 시나리오]</strong><br>- 청진기를 맨 '의사'와 병실의 '환자'가 대화하고 있으므로 '치료/진료'의 맥락과 쉽게 연결되도록 발문 지도하십시오.",
         optionExplanations: [
           "① 진료를 받습니다 (O) - 의사에게 아픈 상태를 말하고 검사를 받는 과정과 정확히 일치합니다.",
-          "② 장난감을 놉니다 (X) - 어린아이가 놀이터나 방에서 노는 일과 매치되지 않습니다.",
+          "② 장난감을 가지고 놉니다 (X) - 어린아이가 놀이터나 방에서 노는 상황이 아닙니다.",
           "③ 공부를 가르칩니다 (X) - 학교나 교실에서 선생님이 하는 행위입니다.",
           "④ 요리를 시킵니다 (X) - 주방이나 식당에서 셰프가 지시하는 행위입니다."
         ]
@@ -278,12 +279,82 @@ export const curriculumData = [
           "③ 시장에 가서 옷을 살 것입니다 (X) - 여자의 동선 및 쇼핑 계획은 언급되지 않았습니다.",
           "④ 만나서 놀기로 했습니다 (X) - 남자가 집에서 쉴 것이라 했으므로 오늘 약속은 없습니다."
         ]
+      },
+      {
+        id: "q1_r6",
+        type: "reading",
+        category: "읽기 (Reading) 추가 실전",
+        question: "다음 안내문을 볼 수 있는 장소로 가장 알맞은 곳을 고르십시오.<br><br><div class='quiz-box'><strong>책을 읽는 분들을 위해 조용히 해 주세요.<br>빌린 책은 14일 안에 돌려주세요.</strong></div>",
+        options: ["도서관", "식당", "은행", "병원"],
+        correct: 0,
+        explanation: "'책을 읽다', '빌린 책', '돌려주다'는 도서관에서 사용하는 핵심 표현이므로 정답은 ①번입니다.",
+        instructorGuide: "<strong>[추가 읽기 1 교수 팁]</strong><br>- 장소를 직접 말하지 않아도 핵심 명사와 행동을 연결해 장소를 추론하게 하세요.",
+        optionExplanations: [
+          "① 도서관 (O) - 책을 읽고 빌리고 반납하는 장소입니다.",
+          "② 식당 (X) - 음식 주문이나 식사 관련 표현이 없습니다.",
+          "③ 은행 (X) - 예금, 출금, 통장 관련 표현이 없습니다.",
+          "④ 병원 (X) - 진료나 약과 관련된 안내가 아닙니다."
+        ]
+      },
+      {
+        id: "q1_r7",
+        type: "reading",
+        category: "읽기 (Reading) 추가 실전",
+        question: "다음 빈칸에 들어갈 가장 알맞은 조사를 고르십시오.<br><br><div class='quiz-box'>선생님( &nbsp; &nbsp; ) 교실에서 한국어를 가르칩니다.</div>",
+        options: ["이", "을", "에", "와"],
+        correct: 0,
+        explanation: "'선생님'이 행동의 주체이므로 받침 있는 명사 뒤에 붙는 주격 조사 '이'가 알맞습니다.",
+        instructorGuide: "<strong>[추가 읽기 2 교수 팁]</strong><br>- 누가 행동하는지 먼저 찾은 뒤 이/가를 선택하게 하세요.",
+        optionExplanations: [
+          "① 이 (O) - 받침 있는 주어 '선생님' 뒤에 붙는 주격 조사입니다.",
+          "② 을 (X) - 목적어를 표시하는 조사입니다.",
+          "③ 에 (X) - 시간이나 도착점, 존재 장소 등에 쓰는 조사입니다.",
+          "④ 와 (X) - 두 명사를 연결하거나 함께하는 대상을 나타냅니다."
+        ]
+      },
+      {
+        id: "q1_l6",
+        type: "listening",
+        category: "듣기 (Listening) 추가 실전",
+        question: "다음을 듣고 여자가 누구인지 고르십시오.",
+        audioScript: [
+          { speaker: "여", text: "여러분, 책 25쪽을 펴세요. 오늘은 장소를 나타내는 말을 공부하겠습니다." }
+        ],
+        options: ["학생", "선생님", "의사", "요리사"],
+        correct: 1,
+        explanation: "여자는 여러 사람에게 책을 펴라고 안내하고 공부할 내용을 설명하므로 선생님입니다.",
+        instructorGuide: "<strong>[추가 듣기 1 교수 팁]</strong><br>- '여러분', '책을 펴세요', '공부하겠습니다'를 직업 추론의 단서로 잡게 하세요.",
+        optionExplanations: [
+          "① 학생 (X) - 수업 내용을 안내하는 역할이 아닙니다.",
+          "② 선생님 (O) - 학생들에게 교재와 학습 내용을 안내하고 있습니다.",
+          "③ 의사 (X) - 환자나 진료에 관한 말이 없습니다.",
+          "④ 요리사 (X) - 음식이나 조리에 관한 말이 없습니다."
+        ]
+      },
+      {
+        id: "q1_l7",
+        type: "listening",
+        category: "듣기 (Listening) 추가 실전",
+        question: "다음을 듣고 이어질 말로 가장 알맞은 것을 고르십시오.",
+        audioScript: [
+          { speaker: "남", text: "수진 씨, 지금 어디에 가요?" }
+        ],
+        options: ["학교에 가요.", "학교에서 공부했어요.", "학생이 많아요.", "책이 재미있어요."],
+        correct: 0,
+        explanation: "'어디에 가요?'는 목적지를 묻는 질문이므로 장소와 '에 가요'로 대답하는 ①번이 자연스럽습니다.",
+        instructorGuide: "<strong>[추가 듣기 2 교수 팁]</strong><br>- 의문사 '어디'와 이동 표현 '에 가다'의 짝을 빠르게 찾게 하세요.",
+        optionExplanations: [
+          "① 학교에 가요 (O) - 이동 목적지를 직접 대답합니다.",
+          "② 학교에서 공부했어요 (X) - 과거 행동을 말해 질문과 시제가 맞지 않습니다.",
+          "③ 학생이 많아요 (X) - 사람 수에 관한 설명입니다.",
+          "④ 책이 재미있어요 (X) - 책에 대한 감상으로 질문과 관련이 없습니다."
+        ]
       }
     ],
 
     // 3단계: 마무리 장악 (Vocabulary Mastery)
     vocabularyMastery: {
-      title: "3단계: 마무리 정리 (오늘 꼭 장악해야 할 명사 & 동사)",
+      title: "3단계: 마무리 정리 (오늘 꼭 복습할 명사 & 동사)",
       description: "오늘 배운 어휘 중 핵심 단어 20개입니다. 카드를 클릭하여 뜻을 확인하고 확실히 암기했는지 체크하세요.",
       nouns: [
         { word: "학생", meaning: "Student" },
@@ -320,18 +391,18 @@ export const curriculumData = [
     // 상세 시간표 (Timeline)
     timeline: [
       { time: "10분", activity: "도입 & 1회차 복습", detail: "지난 시간에 배운 인물, 장소, 기본 어휘 20개 퀴즈식 복습 및 오늘 수업의 쇼핑/물건 표현 학습 준비" },
-      { time: "30분", activity: "1단계: 단위 공부", detail: "오늘의 주제 어휘 (물건 🛍️, 단위/화폐 🪙, 쇼핑 동사 🛒) 핵심 명사/동사 의미와 조사 결합 형태 파악" },
+      { time: "30분", activity: "1단계: 핵심 어휘 학습", detail: "오늘의 주제 어휘 (물건 🛍️, 단위/화폐 🪙, 쇼핑 동사 🛒) 핵심 명사/동사 의미와 조사 결합 형태 파악" },
       { time: "35분", activity: "2단계: 읽기 실전 훈련", detail: "실제 TOPIK 기출 기반 읽기 문제 풀이 (미술관 안내판 해석, 과거시제 결합) 및 풀이법 설명" },
       { time: "10분", activity: "쉬는 시간", detail: "중간 휴식 시간" },
       { time: "25분", activity: "3단계: 듣기 실전 훈련", detail: "실제 TOPIK 기출 기반 듣기 문제 청취 (첫인상 인사, 컴퓨터 수리 일치) 및 쉐도잉 훈련" },
-      { time: "10분", activity: "마무리 정리 & 장악", detail: "오늘 배운 쇼핑/물건 명사 10개, 생활 동사 10개 플래시카드로 자가진단 및 복습" }
+      { time: "10분", activity: "마무리 정리 & 복습", detail: "오늘 배운 쇼핑/물건 명사 10개, 생활 동사 10개 플래시카드로 자가진단 및 복습" }
     ],
     
     // 1단계: 단위 공부 (Vocab Warm-up)
     vocabWarmUp: {
-      title: "1단계: 단위 공부 (물건 및 쇼핑 관련 어휘)",
+      title: "1단계: 핵심 어휘 학습 (물건 및 쇼핑 관련 어휘)",
       description: "그림 카드를 보고 어떤 물건이나 동작인지 유추한 뒤 카드를 클릭하여 한국어 단어를 확인해 보세요.",
-      instructorGuide: "<strong>[단위 공부 교수 가이드]</strong><br>- 물건별 세는 단위 명사(개, 잔, 켤레 등)는 한국어 초급자에게 암기 부담이 높습니다. 칠판에 그림 카드를 그리거나 학생 주변 물건을 가리키며 훈련하십시오.<br>- 예문 '커피 한 잔에 오천 원입니다'를 통해 가격 질문 구조('얼마입니까?')와 단위를 유기적으로 연계 설명하세요.",
+      instructorGuide: "<strong>[핵심 어휘 학습 교수 가이드]</strong><br>- 물건별 세는 단위 명사(개, 잔, 켤레 등)는 한국어 초급자에게 암기 부담이 높습니다. 칠판에 그림 카드를 그리거나 학생 주변 물건을 가리키며 훈련하십시오.<br>- 예문 '커피 한 잔에 오천 원입니다'를 통해 가격 질문 구조('얼마입니까?')와 단위를 유기적으로 연계 설명하세요.",
       categories: [
         {
           name: "🛍️ 물건 및 상점 명사 (Items & Shops)",
@@ -365,12 +436,12 @@ export const curriculumData = [
 
     // 🕹️ 2회차 어휘-그림 매칭 게임 (영어가 완전 배제된 6쌍)
     vocabGamePairs: [
-      { type: "text-image", text: "서점", matchVal: "topik_bookstore_scene.jpg", key: "bookstore" },
-      { type: "text-image", text: "카페", matchVal: "topik_cafe_scene.jpg", key: "cafe" },
-      { type: "text-image", text: "비 (날씨)", matchVal: "topik_rainy_scene.jpg", key: "rainy" },
-      { type: "text-image", text: "의사", matchVal: "topik_doctor_scene.jpg", key: "doctor" },
-      { type: "text-image", text: "요리사", matchVal: "topik_chef_scene.jpg", key: "chef" },
-      { type: "text-image", text: "학생", matchVal: "topik_student_scene.jpg", key: "student" }
+      { type: "text-text", text: "옷", matchVal: "👕", key: "clothes" },
+      { type: "text-text", text: "신발", matchVal: "👟", key: "shoes" },
+      { type: "text-text", text: "과일", matchVal: "🍎", key: "fruit" },
+      { type: "text-text", text: "우산", matchVal: "☂️", key: "umbrella" },
+      { type: "text-text", text: "돈", matchVal: "💵", key: "money" },
+      { type: "text-text", text: "잔", matchVal: "☕", key: "cup" }
     ],
 
     // 2단계: 실전 훈련 (Actual Practice - 총 10문항)
@@ -387,7 +458,7 @@ export const curriculumData = [
           "오전 9시부터 입장하여 볼 수 있습니다."
         ],
         correct: 2,
-        explanation: "안내문을 보면 입장 요금은 '5,000원'이라 명시되어 있습니다. 월요일은 휴관(쉽니다)하고, 오전 10시에열어 오후 6시(저녁 6시)에 닫으므로 다른 보기들은 오답이며, ③번이 확실한 정답입니다.",
+        explanation: "안내문을 보면 입장 요금은 '5,000원'이라 명시되어 있습니다. 월요일은 휴관하고, 오전 10시에 열어 오후 6시에 닫으므로 다른 보기들은 오답이며 ③번이 정답입니다.",
         instructorGuide: "<strong>[읽기 1번 교수 시나리오]</strong><br>- <strong>대조 분석 훈련:</strong> 안내판 읽기는 사실 일치 유형으로, 보기를 하나씩 지문의 텍스트와 대조하는 것이 기본입니다.",
         optionExplanations: [
           "① 월요일에 문을 엽니다 (X) - 안내문에 '매주 월요일은 쉽니다(휴무)'라고 나와 있습니다.",
@@ -400,7 +471,7 @@ export const curriculumData = [
         id: "q2_r2",
         type: "reading",
         category: "읽기 (Reading) 기출",
-        question: "다음 빈칸에 들어갈 가장 알맞은 단어를 고르십시오. (TOPIK I 기출)<br><br><div class='quiz-box'>저는 어제 주말에 친구를 ( &nbsp; &nbsp; &nbsp; &nbsp; ). 그리고 같이 재미있는 영화를 봤습니다.</div>",
+        question: "다음 빈칸에 들어갈 가장 알맞은 단어를 고르십시오. (TOPIK I 기출 유형)<br><br><div class='quiz-box'>저는 지난 주말에 친구를 ( &nbsp; &nbsp; &nbsp; &nbsp; ). 그리고 같이 재미있는 영화를 봤습니다.</div>",
         options: ["만났습니다", "만납니다", "만날 것입니다", "만나서"],
         correct: 0,
         explanation: "문장에 '어제'라는 시간 단어가 있고, 뒷문장 역시 과거형 시제 '봤습니다'가 쓰였으므로 시제를 과거형으로 일치시켜야 합니다.",
@@ -579,12 +650,64 @@ export const curriculumData = [
           "③ 지갑을 찾으러 집에 갑니다 (X) - 집에 가겠다는 동작 의도는 직접 언급되지 않았습니다.",
           "④ 지갑을 선물해 줍니다 (X) - 선물에 대한 제안이나 거래 정황은 들리지 않습니다."
         ]
+      },
+      {
+        id: "q2_r6",
+        type: "reading",
+        category: "읽기 (Reading) 추가 실전",
+        question: "다음 광고의 내용과 같은 것을 고르십시오.<br><br><div class='quiz-box'><strong>[여름 신발 할인]</strong><br>운동화 30,000원 → 20,000원<br>이번 주 일요일까지</div>",
+        options: ["운동화는 삼만 원입니다.", "할인은 다음 달까지입니다.", "운동화를 이만 원에 살 수 있습니다.", "일요일에는 가게가 쉽니다."],
+        correct: 2,
+        explanation: "광고에 할인 가격이 20,000원으로 표시되어 있으므로 ③번이 내용과 같습니다.",
+        instructorGuide: "<strong>[추가 읽기 1 교수 팁]</strong><br>- 원래 가격, 할인 가격, 행사 기간을 각각 표시한 뒤 선택지와 대조하게 하세요.",
+        optionExplanations: [
+          "① 삼만 원입니다 (X) - 삼만 원은 할인 전 가격입니다.",
+          "② 다음 달까지입니다 (X) - 이번 주 일요일까지라고 했습니다.",
+          "③ 이만 원에 살 수 있습니다 (O) - 표시된 할인 가격과 같습니다.",
+          "④ 일요일에 쉽니다 (X) - 일요일까지 할인한다는 뜻이지 휴무라는 뜻이 아닙니다."
+        ]
+      },
+      {
+        id: "q2_r7",
+        type: "reading",
+        category: "읽기 (Reading) 추가 실전",
+        question: "다음 빈칸에 들어갈 가장 알맞은 말을 고르십시오.<br><br><div class='quiz-box'>카페에서 커피 두 ( &nbsp; &nbsp; )을 주문했습니다.</div>",
+        options: ["명", "잔", "켤레", "장"],
+        correct: 1,
+        explanation: "커피나 차처럼 컵에 담긴 음료를 셀 때는 단위 명사 '잔'을 사용합니다.",
+        instructorGuide: "<strong>[추가 읽기 2 교수 팁]</strong><br>- 명·잔·켤레·장의 대표 명사를 함께 연결해 단위 명사를 비교하세요.",
+        optionExplanations: [
+          "① 명 (X) - 사람을 세는 단위입니다.",
+          "② 잔 (O) - 컵에 담긴 음료를 세는 단위입니다.",
+          "③ 켤레 (X) - 신발이나 양말을 세는 단위입니다.",
+          "④ 장 (X) - 종이, 표, 얇은 물건을 세는 단위입니다."
+        ]
+      },
+      {
+        id: "q2_l6",
+        type: "listening",
+        category: "듣기 (Listening) 추가 실전",
+        question: "다음을 듣고 여자가 할 행동으로 가장 알맞은 것을 고르십시오.",
+        audioScript: [
+          { speaker: "여", text: "이 신발은 조금 작아요. 한 사이즈 큰 것으로 바꿔 주세요." },
+          { speaker: "남", text: "네, 손님. 잠시만 기다려 주세요." }
+        ],
+        options: ["신발값을 깎습니다.", "신발을 더 작은 것으로 바꿉니다.", "큰 사이즈 신발을 받습니다.", "신발을 빌립니다."],
+        correct: 2,
+        explanation: "여자는 현재 신발이 작아서 더 큰 사이즈로 교환해 달라고 요청했습니다.",
+        instructorGuide: "<strong>[추가 듣기 교수 팁]</strong><br>- '작다'와 '한 사이즈 큰 것'의 대조를 듣고 교환 행동을 예측하게 하세요.",
+        optionExplanations: [
+          "① 값을 깎습니다 (X) - 가격 할인을 요청하지 않았습니다.",
+          "② 더 작은 것으로 바꿉니다 (X) - 현재 신발이 이미 작습니다.",
+          "③ 큰 사이즈 신발을 받습니다 (O) - 여자의 교환 요청과 일치합니다.",
+          "④ 신발을 빌립니다 (X) - 구매한 상품을 교환하는 상황입니다."
+        ]
       }
     ],
 
     // 3단계: 마무리 장악 (Vocabulary Mastery)
     vocabularyMastery: {
-      title: "3단계: 마무리 정리 (오늘 꼭 장악해야 할 명사 & 동사)",
+      title: "3단계: 마무리 정리 (오늘 꼭 복습할 명사 & 동사)",
       description: "오늘 배운 어휘 중 핵심 단어 20개입니다. 카드를 클릭하여 뜻을 확인하고 확실히 암기했는지 체크하세요.",
       nouns: [
         { word: "옷", meaning: "Clothes" },
@@ -621,18 +744,18 @@ export const curriculumData = [
     // 상세 시간표 (Timeline)
     timeline: [
       { time: "10분", activity: "도입 & 2회차 복습", detail: "지난 시간의 물건, 단위, 쇼핑 관련 어휘 20개 구두 테스트 및 오늘 다룰 일정/시간/상태 표현 안내" },
-      { time: "30분", activity: "1단계: 단위 공부", detail: "오늘의 주제 어휘 (시간/날씨 명사 📅, 상태 형용사 🌡️, 계획 동사 🗺️)의 뉘앙스 파악 및 구문 활용" },
+      { time: "30분", activity: "1단계: 핵심 어휘 학습", detail: "오늘의 주제 어휘 (시간/날씨 명사 📅, 상태 형용사 🌡️, 계획 동사 🗺️)의 뉘앙스 파악 및 구문 활용" },
       { time: "35분", activity: "2단계: 읽기 실전 훈련", detail: "실제 TOPIK 기출 기반 읽기 문제 풀이 (요일 약속 메모 해석, 감기 지문 내용 일치) 및 주제 도출법 해설" },
       { time: "10분", activity: "쉬는 시간", detail: "중간 휴식 시간" },
       { time: "25분", activity: "3단계: 듣기 실전 훈련", detail: "실제 TOPIK 기출 기반 듣기 문제 청취 (주말 계획 대답, 비오는 날 빨래 걷기) 및 상황 추론 훈련" },
-      { time: "10분", activity: "마무리 정리 & 장악", detail: "오늘 배운 시간/상태 명사 10개, 상태 동사/형용사 10개 플래시카드로 자가테스트" }
+      { time: "10분", activity: "마무리 정리 & 복습", detail: "오늘 배운 시간/상태 명사 10개, 상태 동사/형용사 10개 플래시카드로 자가테스트" }
     ],
     
     // 1단계: 단위 공부 (Vocab Warm-up)
     vocabWarmUp: {
-      title: "1단계: 단위 공부 (시간 및 상태 형용사)",
+      title: "1단계: 핵심 어휘 학습 (시간 및 상태 표현)",
       description: "그림 카드를 보고 어떤 날씨나 상태 혹은 동사인지 유추한 뒤 카드를 클릭하여 한국어 단어를 확인해 보세요.",
-      instructorGuide: "<strong>[단위 공부 교수 가이드]</strong><br>- 감정/상태 형용사 '아프다', '바쁘다'의 불규칙 어미 변화('아파요', '바빠요')를 칠판에 나란히 적어가며 'ㅡ' 모음 탈락 현상을 문법적으로 판서하여 요약하십시오.<br>- 요일 및 미래 계획 시제(Noun + 할 거예요)는 1급 고득점을 가르는 핵심 문형이므로, 주말에 무얼 하고 싶은지 한 명씩 릴레이 대답을 훈련시키십시오.",
+      instructorGuide: "<strong>[핵심 어휘 학습 교수 가이드]</strong><br>- 감정/상태 형용사 '아프다', '바쁘다'의 활용형('아파요', '바빠요')을 칠판에 나란히 적어 'ㅡ' 탈락을 설명하십시오.<br>- 미래 계획 표현 '-(으)ㄹ 거예요'를 활용해 주말에 무엇을 할지 한 명씩 이어서 대답하게 하십시오.",
       categories: [
         {
           name: "📅 시간 및 날씨 명사 (Time & Weather)",
@@ -666,12 +789,12 @@ export const curriculumData = [
 
     // 🕹️ 3회차 어휘-그림 매칭 게임 (영어가 완전 배제된 6쌍)
     vocabGamePairs: [
-      { type: "text-image", text: "서점", matchVal: "topik_bookstore_scene.jpg", key: "bookstore" },
-      { type: "text-image", text: "카페", matchVal: "topik_cafe_scene.jpg", key: "cafe" },
-      { type: "text-image", text: "비 (날씨)", matchVal: "topik_rainy_scene.jpg", key: "rainy" },
-      { type: "text-image", text: "의사", matchVal: "topik_doctor_scene.jpg", key: "doctor" },
-      { type: "text-image", text: "요리사", matchVal: "topik_chef_scene.jpg", key: "chef" },
-      { type: "text-image", text: "학생", matchVal: "topik_student_scene.jpg", key: "student" }
+      { type: "text-text", text: "오늘", matchVal: "📅", key: "today" },
+      { type: "text-text", text: "내일", matchVal: "⏭️", key: "tomorrow" },
+      { type: "text-text", text: "비", matchVal: "🌧️", key: "rain" },
+      { type: "text-text", text: "아프다", matchVal: "🤒", key: "sick" },
+      { type: "text-text", text: "쉬다", matchVal: "🛋️", key: "rest" },
+      { type: "text-text", text: "약속하다", matchVal: "🤝", key: "promise" }
     ],
 
     // 2단계: 실전 훈련 (Actual Practice - 총 10문항)
@@ -854,7 +977,7 @@ export const curriculumData = [
         category: "듣기 (Listening) 추가 기출",
         question: "다음을 듣고 두 사람이 대화하는 장소로 가장 알맞은 곳을 고르십시오.",
         audioScript: [
-          { speaker: "여", text: "승무원님, 이 가방을 통로 쪽에 두고 내려도 괜찮을까요?" },
+          { speaker: "여", text: "승무원님, 이 가방을 통로 쪽에 놓아도 괜찮을까요?" },
           { speaker: "남", text: "아니요, 승객님. 통로는 위험하니 머리 위 선반에 올리시거나 안고 타셔야 합니다. 기차가 곧 출발합니다." }
         ],
         options: ["병원", "약국", "기차 안", "서점"],
@@ -863,7 +986,7 @@ export const curriculumData = [
         instructorGuide: "<strong>[듣기 4번 교수 시나리오]</strong><br>- '승무원', '승객', '선반', '기차 출발' 단어들을 조합해 탑승 공간을 유추하게 이끄십시오.",
         optionExplanations: [
           "① 병원 (X) - 환자 및 진료 행위가 들리지 않습니다.",
-          "② 약국 (O) - 복약 지도 상황이 아닙니다.",
+          "② 약국 (X) - 복약 지도 상황이 아닙니다.",
           "③ 기차 안 (O) - 출발을 앞둔 기차 객실 정황과 안내 멘트가 완벽히 증명됩니다.",
           "④ 서점 (X) - 도서 검색 및 판매 상황이 아닙니다."
         ]
@@ -892,12 +1015,68 @@ export const curriculumData = [
           "③ 도서관에서 만납니다 (X) - 변경 목적지는 도서관이 아닌 미술관입니다.",
           "④ 비가 오지 않기를 바라고 있습니다 (X) - 기상 예측에 대한 심리적 서술은 없습니다."
         ]
+      },
+      {
+        id: "q3_r6",
+        type: "reading",
+        category: "읽기 (Reading) 추가 실전",
+        question: "다음 일정표의 내용과 같은 것을 고르십시오.<br><br><div class='quiz-box'><strong>[토요일 계획]</strong><br>오전 10시: 병원<br>오후 1시: 점심 약속<br>오후 4시: 도서관</div>",
+        options: ["아침에 도서관에 갑니다.", "점심을 먹은 후 병원에 갑니다.", "오후 네 시에 도서관에 갑니다.", "토요일에는 약속이 없습니다."],
+        correct: 2,
+        explanation: "일정표에 오후 4시 도서관 방문이 적혀 있으므로 정답은 ③번입니다.",
+        instructorGuide: "<strong>[추가 읽기 교수 팁]</strong><br>- 시간 표현을 먼저 표시하고 각 행동의 순서를 확인하게 하세요.",
+        optionExplanations: [
+          "① 아침에 도서관에 갑니다 (X) - 아침에는 병원에 갑니다.",
+          "② 점심 후 병원에 갑니다 (X) - 병원은 오전 일정입니다.",
+          "③ 오후 네 시에 도서관에 갑니다 (O) - 일정표의 내용과 같습니다.",
+          "④ 약속이 없습니다 (X) - 오후 1시에 점심 약속이 있습니다."
+        ]
+      },
+      {
+        id: "q3_l6",
+        type: "listening",
+        category: "듣기 (Listening) 추가 실전",
+        question: "다음을 듣고 남자의 내일 계획을 고르십시오.",
+        audioScript: [
+          { speaker: "여", text: "내일 회사가 끝난 후에 뭐 할 거예요?" },
+          { speaker: "남", text: "친구 생일이라서 저녁에 같이 밥을 먹을 거예요." }
+        ],
+        options: ["회사에서 야근합니다.", "친구와 저녁을 먹습니다.", "집에서 혼자 쉽니다.", "친구에게 책을 빌립니다."],
+        correct: 1,
+        explanation: "남자는 친구 생일을 맞아 내일 저녁에 친구와 함께 식사할 계획입니다.",
+        instructorGuide: "<strong>[추가 듣기 1 교수 팁]</strong><br>- 미래형 '-을 거예요' 앞의 행동을 정확히 받아쓰게 하세요.",
+        optionExplanations: [
+          "① 야근합니다 (X) - 회사가 끝난 후의 계획을 말하고 있습니다.",
+          "② 친구와 저녁을 먹습니다 (O) - 남자가 말한 내일 계획과 같습니다.",
+          "③ 집에서 쉽니다 (X) - 친구를 만날 예정입니다.",
+          "④ 책을 빌립니다 (X) - 책에 대한 언급이 없습니다."
+        ]
+      },
+      {
+        id: "q3_l7",
+        type: "listening",
+        category: "듣기 (Listening) 추가 실전",
+        question: "다음을 듣고 두 사람이 약속을 바꾼 이유를 고르십시오.",
+        audioScript: [
+          { speaker: "남", text: "내일 오전에 공원에서 만날까요?" },
+          { speaker: "여", text: "오전에는 비가 많이 온대요. 비가 그치는 오후 세 시에 만나요." }
+        ],
+        options: ["여자가 아파서", "공원이 문을 닫아서", "오전에 비가 와서", "남자가 바빠서"],
+        correct: 2,
+        explanation: "오전에 비가 많이 온다는 예보 때문에 만나는 시간을 오후 3시로 변경했습니다.",
+        instructorGuide: "<strong>[추가 듣기 2 교수 팁]</strong><br>- 원래 시간, 변경 시간, 변경 이유를 세 칸 표로 정리하게 하세요.",
+        optionExplanations: [
+          "① 여자가 아파서 (X) - 건강 상태에 대한 말이 없습니다.",
+          "② 공원이 문을 닫아서 (X) - 공원 운영 시간은 언급되지 않았습니다.",
+          "③ 오전에 비가 와서 (O) - 약속 시간을 바꾼 직접적인 이유입니다.",
+          "④ 남자가 바빠서 (X) - 남자의 일정 문제는 나오지 않습니다."
+        ]
       }
     ],
 
     // 3단계: 마무리 장악 (Vocabulary Mastery)
     vocabularyMastery: {
-      title: "3단계: 마무리 정리 (오늘 꼭 장악해야 할 명사 & 동사)",
+      title: "3단계: 마무리 정리 (오늘 꼭 복습할 명사 & 동사)",
       description: "날씨, 일정 조정, 상태 설명 등에 필수적인 핵심 10개 명사 및 10개 동사입니다.",
       nouns: [
         { word: "오늘", meaning: "Today" },
