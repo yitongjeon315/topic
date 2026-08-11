@@ -40,7 +40,7 @@
 
             <!-- Zoom Presentation Mode Toggle -->
             <button class="zoom-toggle-btn" id="zoom-toggle">
-              🖥️ 줌 화면 공유 모드 ON
+              🖥️ PPT 발표 모드
             </button>
             
             <div class="progress-wrapper">
@@ -83,6 +83,13 @@
         <p style="font-size: 0.8rem; margin-top: 0.5rem;">본 플랫폼은 TOPIK I PBT 문항 유형을 참고해 자체 제작한 모의 학습 자료입니다.</p>
       </footer>
     </div>
+
+    <nav id="presentation-controls" class="presentation-controls" aria-label="문제 슬라이드 이동" hidden>
+      <button id="presentation-prev" type="button" aria-label="이전 문제">← 이전</button>
+      <strong id="presentation-counter" class="presentation-counter" aria-live="polite">문제 1 / 1</strong>
+      <button id="presentation-next" type="button" aria-label="다음 문제">다음 →</button>
+      <span class="presentation-key-hint">← → 키로 이동 · ESC 종료</span>
+    </nav>
 
     <dialog id="translation-dialog" class="translation-dialog" aria-labelledby="translation-dialog-title">
       <div class="translation-dialog-header">

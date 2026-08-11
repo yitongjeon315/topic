@@ -20,6 +20,8 @@ let isZoomMode = false;
 let isTimelineOpen = true;
 let isIntroOpen = true;
 let isInstructorMode = false; // Instructor guide hidden by default
+let presentationSlideIndex = 0;
+let presentationReturnScrollY = 0;
 
 const vocabVisuals = {
   '옷': '👕', '신발': '👟', '과일': '🍎', '우산': '☂️',
@@ -59,6 +61,10 @@ const zoomToggleBtn = document.getElementById('zoom-toggle');
 const instructorToggleBtn = document.getElementById('instructor-toggle');
 const pdfPrintBtn = document.getElementById('pdf-print-btn');
 const resetBtn = document.getElementById('reset-btn');
+const presentationControls = document.getElementById('presentation-controls');
+const presentationPrevBtn = document.getElementById('presentation-prev');
+const presentationNextBtn = document.getElementById('presentation-next');
+const presentationCounter = document.getElementById('presentation-counter');
 const translationPopupBtn = document.getElementById('translation-popup-btn');
 const translationDialog = document.getElementById('translation-dialog');
 const translationDialogClose = document.getElementById('translation-dialog-close');
@@ -213,6 +219,75 @@ function saveLocalCurriculum() {
   localStorage.setItem('topik_curriculum_edits', JSON.stringify(activeCurriculum));
 }
 
+function getPresentationSlides() {
+  return Array.from(contentContainer.querySelectorAll('.quiz-card'));
+}
+
+function showPresentationSlide(index) {
+  const slides = getPresentationSlides();
+  if (!slides.length) return;
+
+  presentationSlideIndex = Math.max(0, Math.min(index, slides.length - 1));
+  contentContainer.querySelectorAll('.presentation-slide-active').forEach((element) => {
+    element.classList.remove('presentation-slide-active');
+  });
+  contentContainer.querySelectorAll('.presentation-section-active').forEach((element) => {
+    element.classList.remove('presentation-section-active');
+  });
+
+  slides.forEach((slide, slideIndex) => {
+    slide.setAttribute('aria-hidden', slideIndex === presentationSlideIndex ? 'false' : 'true');
+  });
+
+  const activeSlide = slides[presentationSlideIndex];
+  activeSlide.classList.add('presentation-slide-active');
+  activeSlide.closest('.quiz-section')?.classList.add('presentation-section-active');
+  activeSlide.scrollTop = 0;
+
+  presentationCounter.textContent = `문제 ${presentationSlideIndex + 1} / ${slides.length}`;
+  presentationPrevBtn.disabled = presentationSlideIndex === 0;
+  presentationNextBtn.disabled = presentationSlideIndex === slides.length - 1;
+  window.scrollTo(0, 0);
+}
+
+function enterPresentationMode() {
+  const slides = getPresentationSlides();
+  if (!slides.length) return;
+
+  const headerOffset = document.querySelector('header')?.offsetHeight || 0;
+  presentationSlideIndex = slides.reduce((closestIndex, slide, index) => {
+    const currentDistance = Math.abs(slide.getBoundingClientRect().top - headerOffset);
+    const closestDistance = Math.abs(slides[closestIndex].getBoundingClientRect().top - headerOffset);
+    return currentDistance < closestDistance ? index : closestIndex;
+  }, 0);
+
+  stopSpeech();
+  presentationReturnScrollY = window.scrollY;
+  isZoomMode = true;
+  document.body.classList.add('presentation-mode');
+  presentationControls.hidden = false;
+  zoomToggleBtn.innerText = '✕ PPT 발표 종료';
+  requestAnimationFrame(() => showPresentationSlide(presentationSlideIndex));
+}
+
+function exitPresentationMode() {
+  stopSpeech();
+  isZoomMode = false;
+  document.body.classList.remove('presentation-mode');
+  presentationControls.hidden = true;
+  zoomToggleBtn.innerText = '🖥️ PPT 발표 모드';
+  contentContainer.querySelectorAll('.presentation-slide-active, .presentation-section-active').forEach((element) => {
+    element.classList.remove('presentation-slide-active', 'presentation-section-active');
+  });
+  getPresentationSlides().forEach((slide) => slide.removeAttribute('aria-hidden'));
+  window.scrollTo(0, presentationReturnScrollY);
+}
+
+function togglePresentationMode() {
+  if (isZoomMode) exitPresentationMode();
+  else enterPresentationMode();
+}
+
 function normalizeTranslationUrl(value) {
   try {
     const url = new URL(value.trim());
@@ -272,10 +347,30 @@ function saveTranslationUrl() {
 function bindGlobalEvents() {
   // 1. Zoom Presentation Mode
   if (zoomToggleBtn) {
-    zoomToggleBtn.addEventListener('click', () => {
-      isZoomMode = !isZoomMode;
-      document.body.classList.toggle('presentation-mode', isZoomMode);
-      zoomToggleBtn.innerText = isZoomMode ? '🖥️ 일반 모드로 보기' : '🖥️ 줌 화면 공유 모드 ON';
+    zoomToggleBtn.addEventListener('click', togglePresentationMode);
+    presentationPrevBtn.addEventListener('click', () => showPresentationSlide(presentationSlideIndex - 1));
+    presentationNextBtn.addEventListener('click', () => showPresentationSlide(presentationSlideIndex + 1));
+    document.addEventListener('keydown', (event) => {
+      if (!isZoomMode) return;
+      const target = event.target;
+      if (target instanceof HTMLElement && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        exitPresentationMode();
+      } else if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') {
+        event.preventDefault();
+        showPresentationSlide(presentationSlideIndex + 1);
+      } else if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+        event.preventDefault();
+        showPresentationSlide(presentationSlideIndex - 1);
+      } else if (event.key === 'Home') {
+        event.preventDefault();
+        showPresentationSlide(0);
+      } else if (event.key === 'End') {
+        event.preventDefault();
+        showPresentationSlide(getPresentationSlides().length - 1);
+      }
     });
   }
 
@@ -706,6 +801,8 @@ function loadSession(index) {
   if (session.vocabGamePairs) {
     setupVocabGame(session);
   }
+
+  if (isZoomMode) requestAnimationFrame(() => showPresentationSlide(0));
 }
 
 // Render Quiz Card
