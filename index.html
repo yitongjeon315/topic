@@ -23,6 +23,11 @@
               🔑 강사 모드 OFF
             </button>
 
+            <!-- Live translation popup -->
+            <button class="zoom-toggle-btn" id="translation-popup-btn" style="background: linear-gradient(135deg, #0f766e, #0891b2);">
+              🌐 실시간 번역
+            </button>
+
             <!-- PDF Download -->
             <button class="zoom-toggle-btn" id="pdf-print-btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
               📄 PDF 다운로드
@@ -78,6 +83,36 @@
         <p style="font-size: 0.8rem; margin-top: 0.5rem;">본 플랫폼은 TOPIK I PBT 문항 유형을 참고해 자체 제작한 모의 학습 자료입니다.</p>
       </footer>
     </div>
+
+    <dialog id="translation-dialog" class="translation-dialog" aria-labelledby="translation-dialog-title">
+      <div class="translation-dialog-header">
+        <div>
+          <strong id="translation-dialog-title">🌐 TOPIK 실시간 번역 수업방</strong>
+          <p>교안을 보면서 번역과 TTS를 함께 사용할 수 있습니다.</p>
+        </div>
+        <button id="translation-dialog-close" class="translation-dialog-close" type="button" aria-label="번역 팝업 닫기">✕</button>
+      </div>
+
+      <div id="translation-connect-panel" class="translation-connect-panel">
+        <div class="translation-connect-icon" aria-hidden="true">🔗</div>
+        <h2>번역 수업방 연결</h2>
+        <p>Google Apps Script로 공개 배포한 번역 웹앱 주소를 한 번만 입력하세요. 이 기기에 저장됩니다.</p>
+        <label for="translation-app-url">번역 웹앱 주소</label>
+        <div class="translation-url-row">
+          <input id="translation-app-url" type="url" inputmode="url" placeholder="https://script.google.com/macros/s/.../exec" autocomplete="off">
+          <button id="translation-url-save" type="button">연결하기</button>
+        </div>
+        <p id="translation-url-status" class="translation-url-status" role="status"></p>
+      </div>
+
+      <div id="translation-frame-panel" class="translation-frame-panel" hidden>
+        <div class="translation-frame-actions">
+          <button id="translation-url-change" type="button">주소 변경</button>
+          <a id="translation-new-window" href="#" target="_blank" rel="noopener noreferrer">새 창으로 열기 ↗</a>
+        </div>
+        <iframe id="translation-frame" title="TOPIK 실시간 번역 수업방" allow="clipboard-write" loading="lazy"></iframe>
+      </div>
+    </dialog>
 
     <!-- Main JavaScript Entry -->
     <script type="module" src="./src/main.js"></script>

@@ -59,6 +59,18 @@ const zoomToggleBtn = document.getElementById('zoom-toggle');
 const instructorToggleBtn = document.getElementById('instructor-toggle');
 const pdfPrintBtn = document.getElementById('pdf-print-btn');
 const resetBtn = document.getElementById('reset-btn');
+const translationPopupBtn = document.getElementById('translation-popup-btn');
+const translationDialog = document.getElementById('translation-dialog');
+const translationDialogClose = document.getElementById('translation-dialog-close');
+const translationConnectPanel = document.getElementById('translation-connect-panel');
+const translationFramePanel = document.getElementById('translation-frame-panel');
+const translationAppUrlInput = document.getElementById('translation-app-url');
+const translationUrlSaveBtn = document.getElementById('translation-url-save');
+const translationUrlChangeBtn = document.getElementById('translation-url-change');
+const translationUrlStatus = document.getElementById('translation-url-status');
+const translationFrame = document.getElementById('translation-frame');
+const translationNewWindow = document.getElementById('translation-new-window');
+const TRANSLATION_URL_STORAGE_KEY = 'topik_translation_app_url';
 
 // Initialize App
 function init() {
@@ -201,6 +213,61 @@ function saveLocalCurriculum() {
   localStorage.setItem('topik_curriculum_edits', JSON.stringify(activeCurriculum));
 }
 
+function normalizeTranslationUrl(value) {
+  try {
+    const url = new URL(value.trim());
+    const allowedHost = url.hostname === 'script.google.com' || url.hostname.endsWith('.script.googleusercontent.com');
+    if (url.protocol !== 'https:' || !allowedHost) return '';
+    return url.href;
+  } catch {
+    return '';
+  }
+}
+
+function showTranslationConnection() {
+  const savedUrl = localStorage.getItem(TRANSLATION_URL_STORAGE_KEY) || '';
+  translationConnectPanel.hidden = false;
+  translationFramePanel.hidden = true;
+  translationAppUrlInput.value = savedUrl;
+  translationUrlStatus.textContent = '';
+  requestAnimationFrame(() => translationAppUrlInput.focus());
+}
+
+function showTranslationFrame(url) {
+  translationConnectPanel.hidden = true;
+  translationFramePanel.hidden = false;
+  translationNewWindow.href = url;
+  if (translationFrame.src !== url) translationFrame.src = url;
+}
+
+function openTranslationPopup() {
+  const savedUrl = normalizeTranslationUrl(localStorage.getItem(TRANSLATION_URL_STORAGE_KEY) || '');
+  if (savedUrl) showTranslationFrame(savedUrl);
+  else showTranslationConnection();
+
+  if (typeof translationDialog.showModal === 'function') translationDialog.showModal();
+  else translationDialog.setAttribute('open', '');
+}
+
+function closeTranslationPopup() {
+  if (typeof translationDialog.close === 'function') translationDialog.close();
+  else translationDialog.removeAttribute('open');
+  translationFrame.src = 'about:blank';
+}
+
+function saveTranslationUrl() {
+  const url = normalizeTranslationUrl(translationAppUrlInput.value);
+  if (!url) {
+    translationUrlStatus.textContent = '올바른 Google Apps Script 웹앱 주소를 입력해 주세요.';
+    translationAppUrlInput.focus();
+    return;
+  }
+
+  localStorage.setItem(TRANSLATION_URL_STORAGE_KEY, url);
+  translationUrlStatus.textContent = '';
+  showTranslationFrame(url);
+}
+
 // Bind Global Window-level Events
 function bindGlobalEvents() {
   // 1. Zoom Presentation Mode
@@ -243,6 +310,23 @@ function bindGlobalEvents() {
         loadLocalCurriculum();
         loadSession(currentSessionIndex);
       }
+    });
+  }
+
+  // 5. Live translation popup
+  if (translationPopupBtn && translationDialog) {
+    translationPopupBtn.addEventListener('click', openTranslationPopup);
+    translationDialogClose.addEventListener('click', closeTranslationPopup);
+    translationUrlSaveBtn.addEventListener('click', saveTranslationUrl);
+    translationUrlChangeBtn.addEventListener('click', showTranslationConnection);
+    translationAppUrlInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') saveTranslationUrl();
+    });
+    translationDialog.addEventListener('click', (event) => {
+      if (event.target === translationDialog) closeTranslationPopup();
+    });
+    translationDialog.addEventListener('close', () => {
+      translationFrame.src = 'about:blank';
     });
   }
 }

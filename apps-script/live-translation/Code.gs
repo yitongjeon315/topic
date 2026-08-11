@@ -24,7 +24,8 @@ function doGet(e) {
   return template
     .evaluate()
     .setTitle(APP_TITLE)
-    .addMetaTag('viewport', 'width=device-width, initial-scale=1, viewport-fit=cover');
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1, viewport-fit=cover')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
 function getSetupState() {

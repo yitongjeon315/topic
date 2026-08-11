@@ -1698,6 +1698,186 @@ footer {
   font-size: calc(0.9rem * var(--font-scale));
 }
 
+/* Live translation popup */
+.translation-dialog {
+  width: min(1120px, calc(100vw - 2rem));
+  height: min(860px, calc(100dvh - 2rem));
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  background: #eef4ff;
+  color: #0f172a;
+  overflow: hidden;
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.34);
+}
+
+.translation-dialog::backdrop {
+  background: rgba(15, 23, 42, 0.68);
+  backdrop-filter: blur(4px);
+}
+
+.translation-dialog[open] {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.translation-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, #172554, #1e3a8a);
+  color: #ffffff;
+}
+
+.translation-dialog-header strong {
+  display: block;
+  font-size: 1.18rem;
+}
+
+.translation-dialog-header p {
+  margin: 0.2rem 0 0;
+  color: #c7d2fe;
+  font-size: 0.88rem;
+}
+
+.translation-dialog-close {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.translation-connect-panel {
+  align-self: center;
+  justify-self: center;
+  width: min(620px, calc(100% - 2rem));
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border: 1px solid #dbe4f0;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+}
+
+.translation-connect-panel[hidden],
+.translation-frame-panel[hidden] {
+  display: none;
+}
+
+.translation-connect-icon {
+  font-size: 2.4rem;
+}
+
+.translation-connect-panel h2 {
+  margin: 0.35rem 0;
+}
+
+.translation-connect-panel p {
+  color: #475569;
+}
+
+.translation-connect-panel label {
+  display: block;
+  margin: 1rem 0 0.4rem;
+  font-weight: 700;
+}
+
+.translation-url-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.65rem;
+}
+
+.translation-url-row input {
+  min-width: 0;
+  min-height: 48px;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid #94a3b8;
+  border-radius: 11px;
+  font: inherit;
+}
+
+.translation-url-row button,
+.translation-frame-actions button,
+.translation-frame-actions a {
+  min-height: 44px;
+  padding: 0.65rem 0.9rem;
+  border: 0;
+  border-radius: 10px;
+  background: #0f766e;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.translation-url-status {
+  min-height: 1.5rem;
+  margin-top: 0.55rem;
+  color: #b91c1c !important;
+  font-size: 0.9rem;
+}
+
+.translation-frame-panel {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.translation-frame-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.75rem;
+  background: #ffffff;
+  border-bottom: 1px solid #dbe4f0;
+}
+
+.translation-frame-actions button {
+  background: #475569;
+}
+
+#translation-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #eef4ff;
+}
+
+@media (max-width: 680px) {
+  .translation-dialog {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+  }
+
+  .translation-dialog-header {
+    padding: 0.75rem;
+  }
+
+  .translation-dialog-header p {
+    display: none;
+  }
+
+  .translation-url-row {
+    grid-template-columns: 1fr;
+  }
+
+  .translation-url-row button {
+    width: 100%;
+  }
+}
+
 /* 새 사전 학습 영역은 기본 규칙 뒤에서 모바일 폭을 다시 확정합니다. */
 @media (max-width: 600px) {
   .content-area,
@@ -1751,6 +1931,10 @@ footer {
   .audio-controls,
   .audio-script-box,
   .instructor-guide-card { /* Hide instructor guide in clean student PDF */
+    display: none !important;
+  }
+
+  .translation-dialog {
     display: none !important;
   }
 
