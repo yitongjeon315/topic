@@ -95,7 +95,7 @@ function loadLocalCurriculum() {
   if (saved) {
     try {
       activeCurriculum = JSON.parse(saved);
-      
+
       // Hot-patch to sync new properties (q3_l2 and Korean-to-Image vocabGamePairs)
       activeCurriculum.forEach((session, idx) => {
         // Force populates fresh game pairs data to strip out English text
@@ -431,10 +431,10 @@ function bindGlobalEvents() {
     instructorToggleBtn.addEventListener('click', () => {
       isInstructorMode = !isInstructorMode;
       instructorToggleBtn.innerText = isInstructorMode ? '🔑 강사 모드 ON' : '🔑 강사 모드 OFF';
-      instructorToggleBtn.style.background = isInstructorMode 
-        ? 'linear-gradient(135deg, #059669, #047857)' 
+      instructorToggleBtn.style.background = isInstructorMode
+        ? 'linear-gradient(135deg, #059669, #047857)'
         : 'linear-gradient(135deg, #10b981, #059669)';
-      
+
       // Reload session to toggle guide visibility
       loadSession(currentSessionIndex);
     });
@@ -482,7 +482,7 @@ function renderSidebar() {
   activeCurriculum.forEach((session, index) => {
     const li = document.createElement('li');
     li.className = 'nav-item';
-    
+
     const button = document.createElement('button');
     button.className = `nav-btn ${index === currentSessionIndex ? 'active' : ''}`;
     button.dataset.index = index;
@@ -490,18 +490,18 @@ function renderSidebar() {
       <span class="session-num">Session 0${index + 1} (${session.duration})</span>
       <span class="session-title">${session.title.split(': ')[1]}</span>
     `;
-    
+
     button.addEventListener('click', () => {
       stopSpeech();
       currentSessionIndex = index;
-      
+
       document.querySelectorAll('.nav-btn').forEach((btn, i) => {
         btn.classList.toggle('active', i === index);
       });
-      
+
       loadSession(index);
     });
-    
+
     li.appendChild(button);
     navContainer.appendChild(li);
   });
@@ -568,12 +568,12 @@ function renderPrePractice(area, data, stepNumber) {
 function loadSession(index) {
   currentSessionIndex = index;
   const session = activeCurriculum[index];
-  
+
   // Update Progress Bar
   const progressPercent = Math.round(((index + 1) / activeCurriculum.length) * 100);
   progressBarFill.style.width = `${progressPercent}%`;
   progressPercentText.innerText = `회차 진도: ${progressPercent}%`;
-  
+
   // Header (Editable Title)
   let html = `
     <div class="session-header">
@@ -582,7 +582,7 @@ function loadSession(index) {
       <span class="session-badge">⏱ 권장 강의 시간: ${session.duration}</span>
     </div>
   `;
-  
+
   // 국립국제교육원 TOPIK 공식 소개 규정 아코디언 (1회차에 제공)
   if (session.topikIntro) {
     const intro = session.topikIntro;
@@ -601,7 +601,7 @@ function loadSession(index) {
             <strong style="display: block; margin-bottom: 0.25rem; color: var(--primary-light);">👥 응시 대상:</strong>
             <p contenteditable="true" data-type="intro" data-field="target" style="font-size: calc(0.95rem * var(--font-scale)); color: var(--text-muted);">${intro.target}</p>
           </div>
-          
+
           <h4 style="font-size: calc(1.05rem * var(--font-scale)); margin-bottom: 0.5rem; font-weight: 700;">📈 TOPIK I 평가 등급 및 합격 기준</h4>
           <table class="timeline-table" style="margin-bottom: 1.5rem;">
             <thead>
@@ -656,7 +656,7 @@ function loadSession(index) {
       </div>
     `;
   }
-  
+
   // 상세 시간표 (Timeline Accordion)
   if (session.timeline && session.timeline.length > 0) {
     html += `
@@ -688,11 +688,11 @@ function loadSession(index) {
       </div>
     `;
   }
-  
+
   // 1단계: 단위 공부 (Vocab Warm-up) - Interactive Flashcards & Matching Game
   if (session.vocabWarmUp) {
     const warmUp = session.vocabWarmUp;
-    
+
     // Instructor Guide overlay conditional rendering
     let guideHtml = '';
     if (isInstructorMode && warmUp.instructorGuide) {
@@ -714,7 +714,7 @@ function loadSession(index) {
               <div class="vocab-card-wrapper" role="button" tabindex="0" aria-label="${w.word} 어휘 카드 뒤집기">
                 <div class="vocab-card" id="vocab-card-${catIdx}-${wIdx}">
                   <!-- Front face (Show image only for quiz-style learning) -->
-                  <div class="vocab-card-front" style="padding: 0; overflow: hidden; position: relative;">
+                  <div class="vocab-card-front" style="padding: 0; overflow: hidden;">
                     <span class="word-badge" style="position: absolute; top: 8px; left: 8px; z-index: 10; margin-bottom: 0;">${cat.name.split(' ')[0]}</span>
                     ${vocabVisuals[w.word]
                       ? `<div class="vocab-card-front-symbol" role="img" aria-label="${w.word} 연상 기호">${vocabVisuals[w.word]}</div>`
@@ -751,14 +751,14 @@ function loadSession(index) {
       <div class="vocab-warmup-card">
         <h3 contenteditable="true" data-type="warmup" data-field="title">📖 ${warmUp.title}</h3>
         <p class="desc" contenteditable="true" data-type="warmup" data-field="description">${warmUp.description}</p>
-        
+
         ${cardsHtml}
         ${gameBoxHtml}
         ${guideHtml}
       </div>
     `;
   }
-  
+
   // 사전 지식 학습 후 영역별 실전 훈련
   if (session.practiceQuestions && session.practiceQuestions.length > 0) {
     const knowledge = prePracticeBySession[session.id];
@@ -788,7 +788,7 @@ function loadSession(index) {
       </div>
     `;
   }
-  
+
   // 3단계: 마무리 장악 (Vocabulary Mastery)
   if (session.vocabularyMastery) {
     const mastery = session.vocabularyMastery;
@@ -797,7 +797,7 @@ function loadSession(index) {
         <span class="learning-step-badge review">6단계 · 마무리 복습</span>
         <h3 contenteditable="true" data-type="mastery" data-field="title">🎯 ${mastery.title}</h3>
         <p class="desc" contenteditable="true" data-type="mastery" data-field="description">문제를 푼 뒤 틀린 문항의 명사·조사·핵심 표현을 다시 확인하세요. ${mastery.description}</p>
-        
+
         <h4 style="margin-bottom: 0.75rem; font-weight: 700;">🏷️ 필수 명사 (Nouns)</h4>
         <div class="flashcard-grid" style="margin-bottom: 2rem;">
           ${mastery.nouns.map((item, nIdx) => `
@@ -836,17 +836,17 @@ function loadSession(index) {
       </div>
     `;
   }
-  
+
   contentContainer.innerHTML = html;
 
   // Student mode is read-only. Editing is enabled only when instructor mode is on.
   contentContainer.querySelectorAll('[contenteditable]').forEach((element) => {
     element.setAttribute('contenteditable', isInstructorMode ? 'true' : 'false');
   });
-  
+
   // Event Bindings
   bindSessionEvents(session);
-  
+
   // Setup Vocab Match Game
   if (session.vocabGamePairs) {
     setupVocabGame(session);
@@ -860,12 +860,12 @@ function renderQuizCard(q, index) {
   const isSubmitted = submittedQuestions.has(q.id);
   const selectedIdx = selectedAnswers[q.id];
   const isCorrect = selectedIdx == q.correct;
-  
+
   let mediaHtml = '';
   if (q.image) {
     mediaHtml = `<img src="${resolveAssetPath(q.image)}" alt="문항 삽화" class="quiz-image" />`;
   }
-  
+
   let audioPlayerHtml = '';
   if (q.type === 'listening' && q.audioScript) {
     audioPlayerHtml = `
@@ -893,7 +893,7 @@ function renderQuizCard(q, index) {
       </div>
     `;
   }
-  
+
   let optionsHtml = q.options.map((opt, optIdx) => {
     let optClass = '';
     if (isSubmitted) {
@@ -902,11 +902,11 @@ function renderQuizCard(q, index) {
     } else if (selectedIdx === optIdx) {
       optClass = 'selected';
     }
-    
+
     const disabledAttr = isSubmitted ? 'disabled' : '';
     const numberMarkers = ['①', '②', '③', '④'];
     const marker = numberMarkers[optIdx] || (optIdx + 1);
-    
+
     return `
       <button class="option-btn ${optClass}" data-qid="${q.id}" data-oidx="${optIdx}" ${disabledAttr}>
         <span class="option-marker">${marker}</span>
@@ -914,12 +914,12 @@ function renderQuizCard(q, index) {
       </button>
     `;
   }).join('');
-  
+
   let feedbackHtml = '';
   if (isSubmitted) {
     const feedbackClass = isCorrect ? 'correct-feedback' : 'wrong-feedback';
     const feedbackTitle = isCorrect ? '✓ 정답입니다!' : '✗ 틀렸습니다.';
-    
+
     let optionFeedbackHtml = '';
     if (q.optionExplanations && q.optionExplanations.length > 0) {
       optionFeedbackHtml = `
@@ -933,7 +933,7 @@ function renderQuizCard(q, index) {
         </div>
       `;
     }
-    
+
     feedbackHtml = `
       <div class="explanation-panel ${feedbackClass}">
         <div class="feedback-title">${feedbackTitle}</div>
@@ -945,7 +945,7 @@ function renderQuizCard(q, index) {
       </div>
     `;
   }
-  
+
   // Instructor guide under quiz card
   let guideHtml = '';
   if (isInstructorMode && q.instructorGuide) {
@@ -955,7 +955,7 @@ function renderQuizCard(q, index) {
       </div>
     `;
   }
-  
+
   return `
     <div class="quiz-card ${isSubmitted ? 'answered' : ''}" id="quiz-card-${q.id}">
       <div class="quiz-header">
@@ -968,7 +968,7 @@ function renderQuizCard(q, index) {
       <div class="options-list">
         ${optionsHtml}
       </div>
-      <button class="submit-btn" id="submit-btn-${q.id}" data-qid="${q.id}" 
+      <button class="submit-btn" id="submit-btn-${q.id}" data-qid="${q.id}"
         ${isSubmitted ? 'disabled' : ''}>
         정답 확인
       </button>
@@ -1009,7 +1009,7 @@ function bindSessionEvents(session) {
     const toggleVocabCard = (e) => {
       // If user is editing text (contenteditable), do not flip
       if (e.target.hasAttribute('contenteditable')) return;
-      
+
       // If user clicked the speak audio button, trigger speech and block card flipping
       if (e.target.classList.contains('vocab-audio-btn') || e.target.closest('.vocab-audio-btn')) {
         e.stopPropagation();
@@ -1040,31 +1040,31 @@ function bindSessionEvents(session) {
 
       const qid = btn.dataset.qid;
       const oidx = parseInt(btn.dataset.oidx, 10);
-      
+
       selectedAnswers[qid] = oidx;
-      
+
       document.querySelectorAll(`.option-btn[data-qid="${qid}"]`).forEach(opt => {
         opt.classList.remove('selected');
       });
       btn.classList.add('selected');
-      
+
       const submitBtn = document.getElementById(`submit-btn-${qid}`);
       if (submitBtn) submitBtn.removeAttribute('disabled');
     });
   });
-  
+
   // 2. Submit click handlers
   document.querySelectorAll('.submit-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const qid = btn.dataset.qid;
       submittedQuestions.add(qid);
-      
+
       const question = session.practiceQuestions.find(q => q.id === qid);
       if (question) {
         if (activeAudioQuestionId === qid) {
           stopSpeech();
         }
-        
+
         const cardIndex = session.practiceQuestions.findIndex(q => q.id === qid);
         const cardElement = document.getElementById(`quiz-card-${qid}`);
         if (cardElement) {
@@ -1072,7 +1072,7 @@ function bindSessionEvents(session) {
           tempDiv.innerHTML = renderQuizCard(question, cardIndex);
           const newCard = tempDiv.firstElementChild;
           cardElement.replaceWith(newCard);
-          
+
           rebindCardEvents(qid, question, session);
         }
       }
@@ -1134,7 +1134,7 @@ function rebindCardEvents(qid, question, session) {
         handleAudioPlay(qid, session);
       });
     }
-    
+
     const scriptBtn = document.getElementById(`script-btn-${qid}`);
     if (scriptBtn) {
       scriptBtn.addEventListener('click', () => {
@@ -1172,7 +1172,7 @@ function updateCurriculumData(el) {
 
   if (type === 'session-header') {
     session[field] = newValue;
-  } 
+  }
   else if (type === 'intro') {
     session.topikIntro[field] = newValue;
   }
@@ -1348,7 +1348,7 @@ function handleGameCardClick(el, card) {
       card2.el.classList.remove('selected');
       card1.el.classList.add('matched');
       card2.el.classList.add('matched');
-      
+
       // Text updates only for non-image text cards
       if (!card1.card.isImage) {
         card1.el.innerHTML = `✓ ${card1.el.innerText}`;
@@ -1398,65 +1398,65 @@ function handleAudioPlay(qid, session) {
     stopSpeech();
     return;
   }
-  
+
   if (activeAudioQuestionId) {
     stopSpeech();
   }
-  
+
   const question = session.practiceQuestions.find(q => q.id === qid);
   if (!question || !question.audioScript) return;
-  
+
   activeAudioQuestionId = qid;
-  
+
   const playBtn = document.getElementById(`play-btn-${qid}`);
   const playStatus = document.getElementById(`play-status-${qid}`);
   const speedSelect = document.getElementById(`speed-select-${qid}`);
   const rate = parseFloat(speedSelect ? speedSelect.value : 0.9);
-  
+
   if (playBtn) {
     playBtn.innerHTML = '<span class="play-icon">■</span> 듣기 정지';
     playBtn.classList.add('playing');
   }
-  
+
   if (playStatus) {
     playStatus.innerText = '재생 중...';
   }
-  
+
   const synth = window.speechSynthesis;
   currentUtterances = [];
-  
+
   question.audioScript.forEach((line, index) => {
     // Read text stripping raw HTML tags if any (from edits)
     const cleanText = line.text.replace(/<\/?[^>]+(>|$)/g, "");
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = 'ko-KR';
     utterance.rate = rate;
-    
+
     if (line.speaker === '여') {
       utterance.pitch = 1.25;
     } else {
       utterance.pitch = 0.8;
     }
-    
+
     utterance.onstart = () => {
       if (activeAudioQuestionId === qid && playStatus) {
         playStatus.innerText = `🎙 [${line.speaker}] 말하는 중...`;
       }
     };
-    
+
     utterance.onend = () => {
       if (index === question.audioScript.length - 1) {
         resetAudioUI(qid);
       }
     };
-    
+
     utterance.onerror = (err) => {
       console.error('SpeechSynthesis error:', err);
       if (index === question.audioScript.length - 1) {
         resetAudioUI(qid);
       }
     };
-    
+
     currentUtterances.push(utterance);
     synth.speak(utterance);
   });
@@ -1466,16 +1466,16 @@ function handleAudioPlay(qid, session) {
 function resetAudioUI(qid) {
   const playBtn = document.getElementById('play-btn-' + qid);
   const playStatus = document.getElementById('play-status-' + qid);
-  
+
   if (playBtn) {
     playBtn.innerHTML = '<span class="play-icon">▶</span> 듣기 재생';
     playBtn.classList.remove('playing');
   }
-  
+
   if (playStatus) {
     playStatus.innerText = '재생 완료';
   }
-  
+
   if (activeAudioQuestionId === qid) {
     activeAudioQuestionId = null;
     currentUtterances = [];
