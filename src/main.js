@@ -22,6 +22,7 @@ let isIntroOpen = true;
 let isInstructorMode = false; // Instructor guide hidden by default
 let presentationSlideIndex = 0;
 let presentationReturnScrollY = 0;
+let translationDragState = null;
 
 const vocabVisuals = {
   '옷': '👕', '신발': '👟', '과일': '🍎', '우산': '☂️',
@@ -68,6 +69,7 @@ const presentationCounter = document.getElementById('presentation-counter');
 const translationPopupBtn = document.getElementById('translation-popup-btn');
 const translationDialog = document.getElementById('translation-dialog');
 const translationDialogClose = document.getElementById('translation-dialog-close');
+const translationDialogHeader = translationDialog?.querySelector('.translation-dialog-header');
 const translationConnectPanel = document.getElementById('translation-connect-panel');
 const translationFramePanel = document.getElementById('translation-frame-panel');
 const translationAppUrlInput = document.getElementById('translation-app-url');
@@ -77,6 +79,7 @@ const translationUrlStatus = document.getElementById('translation-url-status');
 const translationFrame = document.getElementById('translation-frame');
 const translationNewWindow = document.getElementById('translation-new-window');
 const TRANSLATION_URL_STORAGE_KEY = 'topik_translation_app_url';
+const TRANSLATION_POSITION_STORAGE_KEY = 'topik_translation_panel_position';
 
 // Initialize App
 function init() {
@@ -266,7 +269,7 @@ function enterPresentationMode() {
   isZoomMode = true;
   document.body.classList.add('presentation-mode');
   presentationControls.hidden = false;
-  zoomToggleBtn.innerText = '✕ PPT 발표 종료';
+  zoomToggleBtn.innerText = '🖥️ 일반 모드로 보기';
   requestAnimationFrame(() => showPresentationSlide(presentationSlideIndex));
 }
 
@@ -275,7 +278,7 @@ function exitPresentationMode() {
   isZoomMode = false;
   document.body.classList.remove('presentation-mode');
   presentationControls.hidden = true;
-  zoomToggleBtn.innerText = '🖥️ PPT 발표 모드';
+  zoomToggleBtn.innerText = '🖥️ 줌 화면 공유 모드 ON';
   contentContainer.querySelectorAll('.presentation-slide-active, .presentation-section-active').forEach((element) => {
     element.classList.remove('presentation-slide-active', 'presentation-section-active');
   });
@@ -315,19 +318,68 @@ function showTranslationFrame(url) {
   if (translationFrame.src !== url) translationFrame.src = url;
 }
 
+function restoreTranslationPosition() {
+  if (window.innerWidth <= 680) return;
+  try {
+    const saved = JSON.parse(localStorage.getItem(TRANSLATION_POSITION_STORAGE_KEY) || 'null');
+    if (!saved || !Number.isFinite(saved.left) || !Number.isFinite(saved.top)) return;
+    const maxLeft = Math.max(8, window.innerWidth - translationDialog.offsetWidth - 8);
+    const maxTop = Math.max(8, window.innerHeight - translationDialog.offsetHeight - 8);
+    translationDialog.style.left = `${Math.max(8, Math.min(saved.left, maxLeft))}px`;
+    translationDialog.style.top = `${Math.max(8, Math.min(saved.top, maxTop))}px`;
+    translationDialog.style.right = 'auto';
+  } catch {
+    localStorage.removeItem(TRANSLATION_POSITION_STORAGE_KEY);
+  }
+}
+
 function openTranslationPopup() {
   const savedUrl = normalizeTranslationUrl(localStorage.getItem(TRANSLATION_URL_STORAGE_KEY) || '');
   if (savedUrl) showTranslationFrame(savedUrl);
   else showTranslationConnection();
-
-  if (typeof translationDialog.showModal === 'function') translationDialog.showModal();
-  else translationDialog.setAttribute('open', '');
+  translationDialog.hidden = false;
+  translationPopupBtn.setAttribute('aria-expanded', 'true');
+  translationPopupBtn.innerText = '🌐 번역 숨기기';
+  requestAnimationFrame(restoreTranslationPosition);
 }
 
 function closeTranslationPopup() {
-  if (typeof translationDialog.close === 'function') translationDialog.close();
-  else translationDialog.removeAttribute('open');
-  translationFrame.src = 'about:blank';
+  translationDialog.hidden = true;
+  translationPopupBtn.setAttribute('aria-expanded', 'false');
+  translationPopupBtn.innerText = '🌐 실시간 번역';
+}
+
+function toggleTranslationPopup() {
+  if (translationDialog.hidden) openTranslationPopup();
+  else closeTranslationPopup();
+}
+
+function startTranslationDrag(event) {
+  if (window.innerWidth <= 680 || event.button !== 0 || event.target.closest('button, a, input')) return;
+  const rect = translationDialog.getBoundingClientRect();
+  translationDragState = { offsetX: event.clientX - rect.left, offsetY: event.clientY - rect.top };
+  translationDialog.classList.add('is-dragging');
+  translationDialogHeader.setPointerCapture?.(event.pointerId);
+  event.preventDefault();
+}
+
+function moveTranslationPanel(event) {
+  if (!translationDragState) return;
+  const maxLeft = Math.max(8, window.innerWidth - translationDialog.offsetWidth - 8);
+  const maxTop = Math.max(8, window.innerHeight - translationDialog.offsetHeight - 8);
+  const left = Math.max(8, Math.min(event.clientX - translationDragState.offsetX, maxLeft));
+  const top = Math.max(8, Math.min(event.clientY - translationDragState.offsetY, maxTop));
+  translationDialog.style.left = `${left}px`;
+  translationDialog.style.top = `${top}px`;
+  translationDialog.style.right = 'auto';
+}
+
+function stopTranslationDrag() {
+  if (!translationDragState) return;
+  translationDragState = null;
+  translationDialog.classList.remove('is-dragging');
+  const rect = translationDialog.getBoundingClientRect();
+  localStorage.setItem(TRANSLATION_POSITION_STORAGE_KEY, JSON.stringify({ left: rect.left, top: rect.top }));
 }
 
 function saveTranslationUrl() {
@@ -410,19 +462,17 @@ function bindGlobalEvents() {
 
   // 5. Live translation popup
   if (translationPopupBtn && translationDialog) {
-    translationPopupBtn.addEventListener('click', openTranslationPopup);
+    translationPopupBtn.setAttribute('aria-expanded', 'false');
+    translationPopupBtn.addEventListener('click', toggleTranslationPopup);
     translationDialogClose.addEventListener('click', closeTranslationPopup);
     translationUrlSaveBtn.addEventListener('click', saveTranslationUrl);
     translationUrlChangeBtn.addEventListener('click', showTranslationConnection);
     translationAppUrlInput.addEventListener('keydown', (event) => {
       if (event.key === 'Enter') saveTranslationUrl();
     });
-    translationDialog.addEventListener('click', (event) => {
-      if (event.target === translationDialog) closeTranslationPopup();
-    });
-    translationDialog.addEventListener('close', () => {
-      translationFrame.src = 'about:blank';
-    });
+    translationDialogHeader.addEventListener('pointerdown', startTranslationDrag);
+    document.addEventListener('pointermove', moveTranslationPanel);
+    document.addEventListener('pointerup', stopTranslationDrag);
   }
 }
 
