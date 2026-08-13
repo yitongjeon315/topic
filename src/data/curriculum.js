@@ -65,7 +65,7 @@ export const curriculumData = [
           name: "🏃 동작 동사 (Basic Verbs)",
           words: [
             { word: "가다", definition: "To go", example: "저는 오늘 시장에 갑니다.", image: "topik_go_scene.jpg" },
-            { word: "오다", definition: "To come", example: "비가 오면 우산을 씁니다.", image: "topik_come_scene.jpg" },
+            { word: "오다", definition: "To come", example: "친구가 우리 집에 옵니다.", image: "topik_come_scene.jpg" },
             { word: "하다", definition: "To do", example: "동생은 매일 운동을 합니다.", image: "topik_student_scene.jpg" },
             { word: "먹다", definition: "To eat", example: "아침에 사과를 먹었습니다.", image: "topik_restaurant_scene.jpg" }
           ]
