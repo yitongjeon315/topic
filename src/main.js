@@ -60,7 +60,6 @@ const progressBarFill = document.getElementById('progress-bar');
 const progressPercentText = document.getElementById('progress-percent');
 const zoomToggleBtn = document.getElementById('zoom-toggle');
 const instructorToggleBtn = document.getElementById('instructor-toggle');
-const pdfPrintBtn = document.getElementById('pdf-print-btn');
 const resetBtn = document.getElementById('reset-btn');
 const presentationControls = document.getElementById('presentation-controls');
 const presentationPrevBtn = document.getElementById('presentation-prev');
@@ -440,15 +439,7 @@ function bindGlobalEvents() {
     });
   }
 
-  // 3. PDF print
-  if (pdfPrintBtn) {
-    pdfPrintBtn.addEventListener('click', () => {
-      stopSpeech();
-      window.print();
-    });
-  }
-
-  // 4. Reset edits
+  // 3. Reset edits
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
       if (confirm('모든 편집된 교안 내용을 원본으로 초기화하시겠습니까?')) {

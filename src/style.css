@@ -2176,7 +2176,7 @@ body.presentation-mode .explanation-panel {
 
 @media (max-width: 900px) {
   body.presentation-mode .logo,
-  body.presentation-mode #pdf-print-btn,
+  body.presentation-mode #pdf-download-btn,
   body.presentation-mode #reset-btn,
   body.presentation-mode .progress-wrapper {
     display: none;
